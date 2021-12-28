@@ -11,7 +11,7 @@ export class ArticlesList extends Component {
         <button onClick={onAddArticle}>Agregar Articulo</button>
         {items.map((item) => (
           <Article
-            key={item.id}
+            key={item.index}
             item={item}
             onDeleteArticle={onDeleteArticle}
             onUpdateArticle={onUpdateArticle}

@@ -4,28 +4,40 @@ import LotCost from './modules/LotCost';
 
 export class App extends Component {
   state = {
-    items: [
-      {
-        id: 0,
-        descripcion: 'Articulo0',
-      },
-      {
-        id: 1,
-        descripcion: 'Articulo1',
-      },
-    ],
+    items: [],
   };
 
   handleAddArticle = () => {
-    console.log('new article');
+    let items = [...this.state.items];
+    const item = {
+      index: items.length,
+      descripcion: '',
+      cantidad: 1,
+      peso: 0,
+      precioUnitario: 0,
+      arancel: 0,
+      margen: 0,
+    };
+    items.push(item);
+    items = this.reIndex(items);
+    this.setState({ items });
   };
 
-  handleUpdateArticle = (event, id) => {
-    console.log(event, id);
+  handleUpdateArticle = (event, index) => {
+    console.log(event, index);
   };
 
-  handleDeleteArticle = (id) => {
-    console.log(id);
+  handleDeleteArticle = (index) => {
+    let items = this.state.items.filter((item) => item.index !== index);
+    items = this.reIndex(items);
+    this.setState({ items });
+  };
+
+  reIndex = (prevArr) => {
+    return prevArr.map((elem, index) => {
+      elem.index = index;
+      return elem;
+    });
   };
 
   render() {
