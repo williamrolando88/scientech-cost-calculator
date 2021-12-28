@@ -15,8 +15,17 @@ export class App extends Component {
       },
     ],
   };
+
+  handleAddArticle = () => {
+    console.log('new article');
+  };
+
   handleUpdateArticle = (event, id) => {
     console.log(event, id);
+  };
+
+  handleDeleteArticle = (id) => {
+    console.log(id);
   };
 
   render() {
@@ -26,7 +35,9 @@ export class App extends Component {
         <LotCost />
         <ArticlesList
           items={this.state.items}
-          updateArticle={this.handleUpdateArticle}
+          onUpdateArticle={this.handleUpdateArticle}
+          onDeleteArticle={this.handleDeleteArticle}
+          onAddArticle={this.handleAddArticle}
         />
       </div>
     );

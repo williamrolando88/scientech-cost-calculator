@@ -15,50 +15,52 @@ export class Article extends Component {
         gananciaUnitaria,
         pvpUnitario,
       },
-      updateArticle,
+      onUpdateArticle,
+      onDeleteArticle,
     } = this.props;
     return (
       <div className='bg-lime-500 flex '>
         <label>{id}</label>
         <input
           value={descripcion}
-          onChange={(e) => updateArticle(e, id)}
+          onChange={(e) => onUpdateArticle(e, id)}
           name='descripcion'
           placeholder='descripcion'
         />
         <input
           value={cantidad}
-          onChange={(e) => updateArticle(e, id)}
+          onChange={(e) => onUpdateArticle(e, id)}
           name='cantidad'
           placeholder='cantidad'
         />
         <input
           value={peso}
-          onChange={(e) => updateArticle(e, id)}
+          onChange={(e) => onUpdateArticle(e, id)}
           name='peso'
           placeholder='peso'
         />
         <input
           value={precioUnitario}
-          onChange={(e) => updateArticle(e, id)}
+          onChange={(e) => onUpdateArticle(e, id)}
           name='precioUnitario'
           placeholder='precioUnitario'
         />
         <input
           value={arancel}
-          onChange={(e) => updateArticle(e, id)}
+          onChange={(e) => onUpdateArticle(e, id)}
           name='arancel'
           placeholder='arancel'
         />
         <input
           value={margen}
-          onChange={(e) => updateArticle(e, id)}
+          onChange={(e) => onUpdateArticle(e, id)}
           name='margen'
           placeholder='margen'
         />
         <label>{costoTotalUnitario}</label>
         <label>{gananciaUnitaria}</label>
         <label>{pvpUnitario}</label>
+        <button onClick={(id) => onDeleteArticle(id)}>Del</button>
       </div>
     );
   }
