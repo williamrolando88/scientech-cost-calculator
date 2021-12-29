@@ -59,7 +59,6 @@ export class App extends Component {
           : item,
       ),
     });
-    console.log(event, index);
   };
 
   handleDeleteArticle = (index) => {
@@ -74,10 +73,26 @@ export class App extends Component {
         ...this.state.lot,
         input: {
           ...this.state.lot.input,
-          [event.target.name]: event.target.value,
+          [event.target.name]: parseInt(event.target.value),
         },
       },
     });
+  };
+
+  calculateValues = () => {
+    const totalOriginItemsCost = this.calculateTotalOriginItemsCost();
+    console.log(totalOriginItemsCost);
+  };
+
+  calculateTotalOriginItemsCost = () => {
+    const items = [...this.state.items];
+    const ivaOrigen = this.state.lot.input.ivaOrigen;
+    const fleteOrigen = this.state.lot.input.fleteOrigen;
+    let costoTotalItems = 0;
+    items.forEach((item) => {
+      costoTotalItems += item.cantidad * item.precioUnitario;
+    });
+    return costoTotalItems * (1 + ivaOrigen / 100) + fleteOrigen;
   };
 
   reIndex = (prevArr) => {
@@ -91,6 +106,7 @@ export class App extends Component {
     return (
       <div className='bg-slate-50 px-[10%] h-screen flex flex-col gap-6'>
         <h1>Cost calculator</h1>
+        <button onClick={this.calculateValues}>Calcular</button>
         <LotCost lot={this.state.lot} onChangeLot={this.handleChangeLot} />
         <ArticlesList
           items={this.state.items}
