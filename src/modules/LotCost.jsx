@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export class LotCost extends Component {
   render() {
     const {
-      lote: {
+      lot: {
         input: {
           fleteImpuestos,
           tramiteImportacion,
@@ -29,7 +29,7 @@ export class LotCost extends Component {
     } = this.props;
     return (
       <div className='bg-purple-600 w-full h-96 p-6'>
-        <h2 className='text-2xl'>Costos por lote</h2>
+        <h2 className='text-2xl'>Costos por </h2>
         <div className='flex justify-around'>
           <div>
             <h3 className='text-xl '>Logistica Internacional</h3>
@@ -49,21 +49,29 @@ export class LotCost extends Component {
                   onChange={onChangeLot}
                   name='fleteImpuestos'
                   value={fleteImpuestos}
+                  type='number'
+                  min='0'
                 />
                 <input
                   onChange={onChangeLot}
                   name='tramiteImportacion'
                   value={tramiteImportacion}
+                  type='number'
+                  min='0'
                 />
                 <input
                   onChange={onChangeLot}
                   name='fleteReal'
                   value={fleteReal}
+                  type='number'
+                  min='0'
                 />
                 <input
                   onChange={onChangeLot}
                   name='agenteAduanero'
                   value={agenteAduanero}
+                  type='number'
+                  min='0'
                 />
                 <label>{ivaCourier}</label>
                 <label>{totalLogisticaInterna}</label>
@@ -105,6 +113,8 @@ export class LotCost extends Component {
                     onChange={onChangeLot}
                     name='logisticaInterna'
                     value={logisticaInterna}
+                    type='number'
+                    min='0'
                   />
                   <label>{pesoTotal}</label>
                 </div>
@@ -124,13 +134,23 @@ export class LotCost extends Component {
                     onChange={onChangeLot}
                     name='ivaOrigen'
                     value={ivaOrigen}
+                    type='number'
+                    min='0'
                   />
                   <input
                     onChange={onChangeLot}
                     name='fleteOrigen'
                     value={fleteOrigen}
+                    type='number'
+                    min='0'
                   />
-                  <input onChange={onChangeLot} name='otros' value={otros} />
+                  <input
+                    onChange={onChangeLot}
+                    name='otros'
+                    value={otros}
+                    type='number'
+                    min='0'
+                  />
                 </div>
               </div>
             </div>

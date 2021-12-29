@@ -5,7 +5,7 @@ import LotCost from './modules/LotCost';
 export class App extends Component {
   state = {
     items: [],
-    lote: {
+    lot: {
       input: {
         fleteImpuestos: 0,
         tramiteImportacion: 0,
@@ -46,6 +46,19 @@ export class App extends Component {
   };
 
   handleUpdateArticle = (event, index) => {
+    this.setState({
+      items: this.state.items.map((item) =>
+        item.index === index
+          ? {
+              ...item,
+              [event.target.name]:
+                event.target.name === 'descripcion'
+                  ? event.target.value
+                  : parseInt(event.target.value),
+            }
+          : item,
+      ),
+    });
     console.log(event, index);
   };
 
@@ -55,8 +68,16 @@ export class App extends Component {
     this.setState({ items });
   };
 
-  handleChangeLot = (e) => {
-    console.log(e.target.name);
+  handleChangeLot = (event) => {
+    this.setState({
+      lot: {
+        ...this.state.lot,
+        input: {
+          ...this.state.lot.input,
+          [event.target.name]: event.target.value,
+        },
+      },
+    });
   };
 
   reIndex = (prevArr) => {
@@ -70,7 +91,7 @@ export class App extends Component {
     return (
       <div className='bg-slate-50 px-[10%] h-screen flex flex-col gap-6'>
         <h1>Cost calculator</h1>
-        <LotCost lote={this.state.lote} onChangeLot={this.handleChangeLot} />
+        <LotCost lot={this.state.lot} onChangeLot={this.handleChangeLot} />
         <ArticlesList
           items={this.state.items}
           onUpdateArticle={this.handleUpdateArticle}
