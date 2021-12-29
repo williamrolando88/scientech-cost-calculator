@@ -46,6 +46,19 @@ export class App extends Component {
   };
 
   handleUpdateArticle = (event, index) => {
+    this.setState({
+      items: this.state.items.map((item) =>
+        item.index === index
+          ? {
+              ...item,
+              [event.target.name]:
+                event.target.name === 'descripcion'
+                  ? event.target.value
+                  : parseInt(event.target.value),
+            }
+          : item,
+      ),
+    });
     console.log(event, index);
   };
 

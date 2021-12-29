@@ -27,6 +27,7 @@ export class Article extends Component {
           onChange={(e) => onUpdateArticle(e, index)}
           name='descripcion'
           placeholder='descripcion'
+          type='text'
         />
         <input
           className='w-1/12'
@@ -34,6 +35,8 @@ export class Article extends Component {
           onChange={(e) => onUpdateArticle(e, index)}
           name='cantidad'
           placeholder='cantidad'
+          type='number'
+          min='1'
         />
         <input
           className='w-1/12'
@@ -41,6 +44,8 @@ export class Article extends Component {
           onChange={(e) => onUpdateArticle(e, index)}
           name='peso'
           placeholder='peso'
+          type='number'
+          min='0'
         />
         <input
           className='w-1/12'
@@ -48,6 +53,8 @@ export class Article extends Component {
           onChange={(e) => onUpdateArticle(e, index)}
           name='precioUnitario'
           placeholder='precioUnitario'
+          type='number'
+          min='0'
         />
         <input
           className='w-1/12'
@@ -55,6 +62,8 @@ export class Article extends Component {
           onChange={(e) => onUpdateArticle(e, index)}
           name='arancel'
           placeholder='arancel'
+          type='number'
+          min='0'
         />
         <input
           className='w-1/12'
@@ -62,6 +71,8 @@ export class Article extends Component {
           onChange={(e) => onUpdateArticle(e, index)}
           name='margen'
           placeholder='margen'
+          type='number'
+          min='0'
         />
         <label className='w-1/12'>{costoTotalUnitario}</label>
         <label className='w-1/12'>{gananciaUnitaria}</label>
