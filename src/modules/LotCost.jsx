@@ -28,7 +28,7 @@ export class LotCost extends Component {
       onChangeLot,
     } = this.props;
     return (
-      <div className='bg-purple-600 w-full h-96 p-6'>
+      <div className='bg-purple-600 w-full p-6'>
         <h2 className='text-2xl'>Costos por </h2>
         <div className='flex justify-around'>
           <div>

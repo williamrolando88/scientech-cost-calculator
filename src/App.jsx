@@ -68,6 +68,9 @@ export class App extends Component {
       precioUnitario: 0,
       arancel: 0,
       margen: 0,
+      costoTotalUnitario: 0,
+      gananciaUnitaria: 0,
+      pvpUnitario: 0,
     };
     items.push(item);
     items = this.reIndex(items);
@@ -207,27 +210,31 @@ export class App extends Component {
 
   render() {
     return (
-      <div className='bg-slate-50 px-[10%] h-screen flex flex-col gap-6'>
-        <h1>Cost calculator</h1>
-        <LotCost lot={this.state.lot} onChangeLot={this.handleChangeLot} />
-        <ArticlesList
-          items={this.state.items}
-          onUpdateArticle={this.handleUpdateArticle}
-          onDeleteArticle={this.handleDeleteArticle}
-          onAddArticle={this.handleAddArticle}
-        />
-        <div>
-          <h2>Controles</h2>
-          <button onClick={this.calculateValues}>Calcular</button>
-          <button onClick={this.handleReset}>Reset</button>
-          <input
-            name='proveedor'
-            type='text'
-            placeholder='Ingrese un proveedor'
-            value={this.state.proveedor}
-            onChange={this.handleChangeProveedor}
+      <div className='bg-slate-50'>
+        <header>logo</header>
+        <div className='px-[10%]  flex flex-col gap-6'>
+          <div className='border rounded-lg p-6'>
+            <h1 className='text-2xl'>Calculadora de Importaciones</h1>
+            <div className='flex gap-6'>
+              <button onClick={this.calculateValues}>Calcular</button>
+              <button onClick={this.handleReset}>Reset</button>
+              <input
+                name='proveedor'
+                type='text'
+                placeholder='Ingrese un proveedor'
+                value={this.state.proveedor}
+                onChange={this.handleChangeProveedor}
+              />
+              <button onClick={this.handleSave}>Guardar</button>
+            </div>
+          </div>
+          <LotCost lot={this.state.lot} onChangeLot={this.handleChangeLot} />
+          <ArticlesList
+            items={this.state.items}
+            onUpdateArticle={this.handleUpdateArticle}
+            onDeleteArticle={this.handleDeleteArticle}
+            onAddArticle={this.handleAddArticle}
           />
-          <button onClick={this.handleSave}>Guardar</button>
         </div>
       </div>
     );
