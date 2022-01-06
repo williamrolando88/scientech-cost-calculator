@@ -80,19 +80,7 @@ export class App extends Component {
   };
 
   calculateValues = () => {
-    const totalOriginItemsCost = this.calculateTotalOriginItemsCost();
-    console.log(totalOriginItemsCost);
-  };
-
-  calculateTotalOriginItemsCost = () => {
-    const items = [...this.state.items];
-    const ivaOrigen = this.state.lot.input.ivaOrigen;
-    const fleteOrigen = this.state.lot.input.fleteOrigen;
-    let costoTotalItems = 0;
-    items.forEach((item) => {
-      costoTotalItems += item.cantidad * item.precioUnitario;
-    });
-    return costoTotalItems * (1 + ivaOrigen / 100) + fleteOrigen;
+    console.log('this is the actual state: ', this.state);
   };
 
   reIndex = (prevArr) => {
