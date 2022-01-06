@@ -1,3 +1,4 @@
+import { data } from 'autoprefixer';
 import React, { Component } from 'react';
 import calculate from './logic/calculate';
 import ArticlesList from './modules/ArticlesList';
@@ -141,6 +142,8 @@ export class App extends Component {
   };
 
   handleSave = () => {
+    const localData = this.getLocalStorage();
+    console.log(localData, ...localData);
     const {
       proveedor,
       items,
@@ -161,7 +164,23 @@ export class App extends Component {
       });
     });
 
-    console.log(itemsInput, input, totalFOBItems, new Date());
+    const newElement = {
+      index: 0,
+      date: new Date(),
+      proveedor: proveedor,
+      items: itemsInput,
+      lotInput: input,
+      FOBValue: totalFOBItems,
+    };
+
+    const newData = [...localData, newElement];
+
+    localStorage.setItem('data', JSON.stringify(newData));
+  };
+
+  getLocalStorage = () => {
+    const localData = JSON.parse(localStorage.getItem('data'));
+    return localData ? localData : [];
   };
 
   handleChangeProveedor = (e) => {
