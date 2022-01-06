@@ -12,7 +12,7 @@ export class LotCost extends Component {
           logisticaInterna,
           ivaOrigen,
           fleteOrigen,
-          otros,
+          comisionBancaria,
         },
         output: {
           ivaCourier,
@@ -127,7 +127,7 @@ export class LotCost extends Component {
                   {/* Input */}
                   <p>IVA origen</p>
                   <p>Flete en origen</p>
-                  <p>Otros</p>
+                  <p>Tarifas bancarias</p>
                 </div>
                 <div className='flex flex-col'>
                   <input
@@ -146,8 +146,8 @@ export class LotCost extends Component {
                   />
                   <input
                     onChange={onChangeLot}
-                    name='otros'
-                    value={otros}
+                    name='comisionBancaria'
+                    value={comisionBancaria}
                     type='number'
                     min='0'
                   />

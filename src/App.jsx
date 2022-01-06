@@ -34,7 +34,7 @@ export class App extends Component {
         logisticaInterna: 20,
         ivaOrigen: 7,
         fleteOrigen: 45,
-        otros: 0,
+        comisionBancaria: 0,
       },
       output: {
         ivaCourier: 0,
@@ -74,7 +74,7 @@ export class App extends Component {
               [event.target.name]:
                 event.target.name === 'descripcion'
                   ? event.target.value
-                  : parseInt(event.target.value),
+                  : parseFloat(event.target.value),
             }
           : item,
       ),
@@ -93,7 +93,7 @@ export class App extends Component {
         ...this.state.lot,
         input: {
           ...this.state.lot.input,
-          [event.target.name]: parseInt(event.target.value),
+          [event.target.name]: parseFloat(event.target.value),
         },
       },
     });

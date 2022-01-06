@@ -14,7 +14,7 @@ const calculate = (stateObj) => {
         logisticaInterna,
         ivaOrigen,
         fleteOrigen,
-        otros,
+        comisionBancaria,
       },
       output: {
         ivaCourier,
@@ -76,13 +76,20 @@ const calculate = (stateObj) => {
     totalCIFItems += item.itemCIFValue;
   });
 
-  console.log(totalFOBItems);
+  let baseCourier = tramiteImportacion + fleteReal + agenteAduanero;
 
   // Set articles output values
   items.forEach((item) => {
+    const weigthFraction = item.pesoItem / pesoTotal;
+    const fobValueFraction = item.itemFOBValue / totalFOBItems;
     // Calculate values
     const costoTotalUnitario =
-      item.itemCIFValue + item.itemFODINFA + item.itemArancel + item.itemISD;
+      item.itemFOBValue +
+      item.itemFODINFA +
+      item.itemArancel +
+      item.itemISD +
+      (baseCourier + logisticaInterna) * weigthFraction +
+      comisionBancaria * fobValueFraction;
     const gananciaUnitaria = (item.margen * costoTotalUnitario) / 100;
     const pvpUnitario = gananciaUnitaria + costoTotalUnitario;
 
@@ -93,7 +100,10 @@ const calculate = (stateObj) => {
   });
 
   // Set lot output variables
-  ivaAduana = totalCIFItems + fodinfa + arancel;
+  ivaAduana = (totalCIFItems + fodinfa + arancel) * 0.12;
+  totalAduana = ivaAduana + fodinfa + arancel;
+  ivaCourier = baseCourier * 0.12;
+  totalLogisticaInt = baseCourier + ivaCourier;
 
   // Format lot output variables
   ivaCourier = rounded(ivaCourier);
@@ -116,7 +126,7 @@ const calculate = (stateObj) => {
         logisticaInterna,
         ivaOrigen,
         fleteOrigen,
-        otros,
+        comisionBancaria,
       },
       output: {
         ivaCourier,
