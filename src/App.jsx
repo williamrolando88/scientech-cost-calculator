@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import calculate from './logic/calculate';
 import ArticlesList from './modules/ArticlesList';
 import LotCost from './modules/LotCost';
 
@@ -18,7 +19,7 @@ export class App extends Component {
       },
       output: {
         ivaCourier: 0,
-        totalLogisticaInterna: 0,
+        totalLogisticaInt: 0,
         fodinfa: 0,
         arancel: 0,
         ivaAduana: 0,
@@ -80,7 +81,8 @@ export class App extends Component {
   };
 
   calculateValues = () => {
-    console.log('this is the actual state: ', this.state);
+    const newState = calculate(this.state);
+    this.setState({ ...newState });
   };
 
   reIndex = (prevArr) => {

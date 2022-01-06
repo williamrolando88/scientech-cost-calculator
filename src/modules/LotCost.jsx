@@ -16,7 +16,7 @@ export class LotCost extends Component {
         },
         output: {
           ivaCourier,
-          totalLogisticaInterna,
+          totalLogisticaInt,
           fodinfa,
           arancel,
           ivaAduana,
@@ -74,7 +74,7 @@ export class LotCost extends Component {
                   min='0'
                 />
                 <label>{ivaCourier}</label>
-                <label>{totalLogisticaInterna}</label>
+                <label>{totalLogisticaInt}</label>
               </div>
             </div>
           </div>
