@@ -1,8 +1,8 @@
-import { data } from 'autoprefixer';
 import React, { Component } from 'react';
 import calculate from './logic/calculate';
 import ArticlesList from './modules/ArticlesList';
 import LotCost from './modules/LotCost';
+import logo from './icons/logo.png';
 
 export class App extends Component {
   state = {
@@ -211,21 +211,33 @@ export class App extends Component {
   render() {
     return (
       <div className='bg-slate-50'>
-        <header>logo</header>
+        <header className='px-[10%] py-4 shadow-md flex justify-between  items-center'>
+          <img className='h-10' src={logo} alt='SCIENTECH-logo' />
+          <div className='flex gap-4'>
+            <input
+              className='px-4'
+              name='proveedor'
+              type='text'
+              placeholder='Ingrese un proveedor'
+              value={this.state.proveedor}
+              onChange={this.handleChangeProveedor}
+            />
+            <button
+              className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'
+              onClick={this.handleSave}>
+              Guardar
+            </button>
+            <button className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'>
+              Recuperar
+            </button>
+          </div>
+        </header>
         <div className='px-[10%]  flex flex-col gap-6'>
           <div className='border rounded-lg p-6'>
             <h1 className='text-2xl'>Calculadora de Importaciones</h1>
             <div className='flex gap-6'>
               <button onClick={this.calculateValues}>Calcular</button>
               <button onClick={this.handleReset}>Reset</button>
-              <input
-                name='proveedor'
-                type='text'
-                placeholder='Ingrese un proveedor'
-                value={this.state.proveedor}
-                onChange={this.handleChangeProveedor}
-              />
-              <button onClick={this.handleSave}>Guardar</button>
             </div>
           </div>
           <LotCost lot={this.state.lot} onChangeLot={this.handleChangeLot} />
