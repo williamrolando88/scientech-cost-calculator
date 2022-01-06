@@ -115,6 +115,7 @@ export class App extends Component {
 
   handleReset = () => {
     this.setState({
+      proveedor: '',
       items: [],
       lot: {
         input: {
@@ -142,14 +143,28 @@ export class App extends Component {
   };
 
   handleSave = () => {
-    const localData = this.getLocalStorage();
-    console.log(localData, ...localData);
     const {
       proveedor,
       items,
       lot: { input },
       totalFOBItems,
     } = this.state;
+
+    if (!proveedor) {
+      alert('Ingrese un proveedor');
+      return;
+    }
+
+    if (items.length === 0) {
+      alert('Ingrese articulos');
+      return;
+    }
+
+    if (!totalFOBItems) {
+      alert('No se puede guardar sin calcular');
+      return;
+    }
+    const localData = this.getLocalStorage();
 
     let itemsInput = [];
     items.forEach((item) => {
@@ -187,6 +202,7 @@ export class App extends Component {
     this.setState({
       [e.target.name]: e.target.value,
     });
+    console.log(this.state);
   };
 
   render() {
