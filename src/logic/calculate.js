@@ -114,7 +114,9 @@ const calculate = (stateObj) => {
   totalAduana = rounded(totalAduana);
   isd = rounded(isd);
   pesoTotal = rounded(pesoTotal);
+  totalFOBItems = rounded(totalFOBItems);
 
+  console.log(items);
   return {
     items,
     lot: {
@@ -139,6 +141,7 @@ const calculate = (stateObj) => {
         pesoTotal,
       },
     },
+    totalFOBItems,
   };
 };
 
