@@ -40,26 +40,49 @@ const calculate = (stateObj) => {
   pesoTotal = 0;
 
   // Declare aux lot variables
-  let totalItems = 0;
+  let totalFOBItems = 0;
+  let totalCIFItems = 0;
 
-  // Extract articles input values and calculate variables
+  // Extract articles input values and calculate EXW values
   items.forEach((item) => {
     // Calculate aux item values
-    item.exwValue = item.cantidad * item.precioUnitario;
     item.pesoItem = item.cantidad * item.peso;
+    item.itemEXWValue =
+      (item.cantidad * item.precioUnitario * (100 + ivaOrigen)) / 100;
 
     // Asign values to lot variables
     pesoTotal += item.pesoItem;
-    totalItems += item.exwValue;
   });
 
-  // Calculate lot aux variables
-  let costoTotal = totalItems + (totalItems * ivaOrigen) / 100 + fleteOrigen;
+  // Calculate FOB and CIF values
+  items.forEach((item) => {
+    const weigthFraction = item.pesoItem / pesoTotal;
+
+    // Calculate aux FOB item values
+    item.itemFOBValue = item.itemEXWValue + fleteOrigen * weigthFraction;
+    item.itemISD = item.itemFOBValue * 0.05;
+
+    // Calculate aux CIF item values
+    item.itemCIFValue =
+      (item.itemFOBValue + fleteImpuestos * weigthFraction) * 1.01;
+    item.itemFODINFA = item.itemCIFValue * 0.005;
+    item.itemArancel = (item.itemCIFValue * item.arancel) / 100;
+
+    // Asign values to lot variables
+    isd += item.itemISD;
+    fodinfa += item.itemFODINFA;
+    arancel += item.itemArancel;
+    totalFOBItems += item.itemFOBValue;
+    totalCIFItems += item.itemCIFValue;
+  });
+
+  console.log(totalFOBItems);
 
   // Set articles output values
   items.forEach((item) => {
     // Calculate values
-    const costoTotalUnitario = costoTotal;
+    const costoTotalUnitario =
+      item.itemCIFValue + item.itemFODINFA + item.itemArancel + item.itemISD;
     const gananciaUnitaria = (item.margen * costoTotalUnitario) / 100;
     const pvpUnitario = gananciaUnitaria + costoTotalUnitario;
 
@@ -68,6 +91,19 @@ const calculate = (stateObj) => {
     item.gananciaUnitaria = rounded(gananciaUnitaria);
     item.pvpUnitario = rounded(pvpUnitario);
   });
+
+  // Set lot output variables
+  ivaAduana = totalCIFItems + fodinfa + arancel;
+
+  // Format lot output variables
+  ivaCourier = rounded(ivaCourier);
+  totalLogisticaInt = rounded(totalLogisticaInt);
+  fodinfa = rounded(fodinfa);
+  arancel = rounded(arancel);
+  ivaAduana = rounded(ivaAduana);
+  totalAduana = rounded(totalAduana);
+  isd = rounded(isd);
+  pesoTotal = rounded(pesoTotal);
 
   return {
     items,
