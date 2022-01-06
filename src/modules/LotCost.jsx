@@ -28,53 +28,65 @@ export class LotCost extends Component {
       onChangeLot,
     } = this.props;
     return (
-      <div className='bg-purple-600 w-full p-6'>
-        <h2 className='text-2xl'>Costos por </h2>
+      <div className='border rounded-lg w-full p-6'>
+        <h2 className='text-lg font-bold mb-4'>Costos por lote</h2>
         <div className='flex justify-around'>
-          <div>
-            <h3 className='text-xl '>Logistica Internacional</h3>
-            <div className='flex'>
-              <div className='w-60'>
-                {/* Input */}
-                <p>Valor de flete para impuestos</p>
-                <p>Tramite de importacion</p>
-                <p>Valor de flete real</p>
-                <p>Agente aduanero</p>
-                {/* Output */}
-                <p>IVA</p>
-                <p>Total Costo Log. Int.</p>
-              </div>
-              <div className='flex flex-col'>
+          <div className='border rounded'>
+            <h3 className='text-xl text-center font-semibold'>
+              Logistica Internacional
+            </h3>
+            <div className='flex flex-col px-4 py-2'>
+              <div className='flex items-center justify-between gap-4'>
+                <p>Valor de flete para impuestos:</p>
                 <input
+                  className='w-20 border'
                   onChange={onChangeLot}
                   name='fleteImpuestos'
                   value={fleteImpuestos}
                   type='number'
                   min='0'
                 />
+              </div>
+              <div className='flex items-center justify-between gap-4'>
+                <p>Tramite de importacion</p>
                 <input
+                  className='w-20 border'
                   onChange={onChangeLot}
                   name='tramiteImportacion'
                   value={tramiteImportacion}
                   type='number'
                   min='0'
                 />
+              </div>
+              <div className='flex items-center justify-between gap-4'>
+                <p>Valor de flete real</p>
                 <input
+                  className='w-20 border'
                   onChange={onChangeLot}
                   name='fleteReal'
                   value={fleteReal}
                   type='number'
                   min='0'
                 />
+              </div>
+              <div className='flex items-center justify-between gap-4'>
+                <p>Agente aduanero</p>
                 <input
+                  className='w-20 border'
                   onChange={onChangeLot}
                   name='agenteAduanero'
                   value={agenteAduanero}
                   type='number'
                   min='0'
                 />
-                <label>{ivaCourier}</label>
-                <label>{totalLogisticaInt}</label>
+              </div>
+              <div className='flex items-center justify-between gap-4'>
+                <p>IVA</p>
+                <label className='w-20 border'>{ivaCourier}</label>
+              </div>
+              <div className='flex items-center justify-between gap-4'>
+                <p>Total Costo Log. Int.</p>
+                <label className='w-20 border'>{totalLogisticaInt}</label>
               </div>
             </div>
           </div>
