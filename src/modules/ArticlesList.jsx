@@ -40,11 +40,11 @@ export class ArticlesList extends Component {
           <button
             className='w-1/12 flex items-center justify-center gap-2'
             onClick={onAddArticle}>
-            <span className='material-icons'>library_add</span>
+            <span className='material-icons text-xl'>library_add</span>
             <span>Nuevo</span>
           </button>
         </div>
-        <div className='overflow-y-scroll h-80 rounded'>
+        <div className='overflow-y-scroll h-72 rounded'>
           {items.map((item) => (
             <Article
               key={item.index}

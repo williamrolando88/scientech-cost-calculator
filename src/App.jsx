@@ -215,7 +215,7 @@ export class App extends Component {
           <img className='h-10' src={logo} alt='SCIENTECH-logo' />
           <div className='flex gap-4'>
             <input
-              className='px-4'
+              className='px-4 rounded border'
               name='proveedor'
               type='text'
               placeholder='Ingrese un proveedor'
@@ -232,12 +232,22 @@ export class App extends Component {
             </button>
           </div>
         </header>
-        <div className='px-[10%]  flex flex-col gap-6'>
-          <div className='border rounded-lg p-6'>
-            <h1 className='text-2xl'>Calculadora de Importaciones</h1>
+        <div className='px-[10%]  flex flex-col gap-6 mt-6 '>
+          <div className='border rounded-lg p-6 flex justify-between items-center'>
+            <h1 className='text-3xl font-semibold font-serif'>
+              Calculadora de Importaciones
+            </h1>
             <div className='flex gap-6'>
-              <button onClick={this.calculateValues}>Calcular</button>
-              <button onClick={this.handleReset}>Reset</button>
+              <button
+                className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'
+                onClick={this.handleReset}>
+                Nuevo
+              </button>
+              <button
+                className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'
+                onClick={this.calculateValues}>
+                Calcular
+              </button>
             </div>
           </div>
           <LotCost lot={this.state.lot} onChangeLot={this.handleChangeLot} />
