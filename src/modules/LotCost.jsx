@@ -82,11 +82,13 @@ export class LotCost extends Component {
               </div>
               <div className='flex items-center justify-between gap-4'>
                 <p className='w-56'>IVA Courier:</p>
-                <label className='w-20 border pl-2'>{ivaCourier}</label>
+                <label className='bg-slate-300 w-20 border pl-2'>
+                  {ivaCourier}
+                </label>
               </div>
               <div className='flex items-center justify-between gap-4'>
                 <p className='w-56 font-semibold'>Total Pago Courier:</p>
-                <label className='w-20 border font-semibold pl-2'>
+                <label className='bg-slate-300 w-20 border font-semibold pl-2'>
                   {totalLogisticaInt}
                 </label>
               </div>
@@ -100,25 +102,33 @@ export class LotCost extends Component {
             <div className='flex flex-col px-4 py-2'>
               <div className='flex items-center justify-between gap-4'>
                 <p className='w-56'>FODINFA:</p>
-                <label className='w-20 border pl-2'>{fodinfa}</label>
+                <label className='bg-slate-300 w-20 border pl-2'>
+                  {fodinfa}
+                </label>
               </div>
               <div className='flex items-center justify-between gap-4'>
                 <p className='w-56'>Aranceles:</p>
-                <label className='w-20 border pl-2'>{arancel}</label>
+                <label className='bg-slate-300 w-20 border pl-2'>
+                  {arancel}
+                </label>
               </div>
               <div className='flex items-center justify-between gap-4'>
                 <p className='w-56'>IVA:</p>
-                <label className='w-20 border pl-2'>{ivaAduana}</label>
+                <label className='bg-slate-300 w-20 border pl-2'>
+                  {ivaAduana}
+                </label>
               </div>
               <div className='flex items-center justify-between gap-4'>
                 <p className='w-56 font-semibold'>Total Pago Aduana:</p>
-                <label className='w-20 font-semibold border pl-2'>
+                <label className='bg-slate-300 w-20 font-semibold border pl-2'>
                   {totalAduana}
                 </label>
               </div>
               <div className='flex items-center justify-between gap-4'>
                 <p className='w-56 font-semibold'>ISD:</p>
-                <label className='w-20 font-semibold border pl-2'>{isd}</label>
+                <label className='bg-slate-300 w-20 font-semibold border pl-2'>
+                  {isd}
+                </label>
               </div>
             </div>
           </div>
@@ -172,7 +182,9 @@ export class LotCost extends Component {
               <div className='flex flex-col px-4 py-2'>
                 <div className='flex items-center justify-between gap-4'>
                   <p className='w-56'>Peso total [lb]:</p>
-                  <label className='w-20 border pl-2'>{pesoTotal}</label>
+                  <label className='bg-slate-300 w-20 border pl-2'>
+                    {pesoTotal}
+                  </label>
                 </div>
                 <div className='flex items-center justify-between gap-4'>
                   <p className='w-56'>Costo de envio:</p>

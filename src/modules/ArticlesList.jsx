@@ -38,7 +38,7 @@ export class ArticlesList extends Component {
             [USD]
           </label>
           <button
-            className='w-1/12 flex items-center justify-center gap-2'
+            className='w-1/12 flex items-center justify-center gap-2 hover:text-green-500'
             onClick={onAddArticle}>
             <span className='material-icons text-xl'>library_add</span>
             <span>Nuevo</span>

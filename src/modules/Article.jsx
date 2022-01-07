@@ -78,9 +78,9 @@ export class Article extends Component {
         <label className='border w-1/12'>{gananciaUnitaria}</label>
         <label className='border w-1/12'>{pvpUnitario}</label>
         <button
-          className='border w-1/12 flex items-center justify-center gap-1'
+          className='border w-1/12 flex items-center justify-center gap-1 hover:text-red-600'
           onClick={() => onDeleteArticle(index)}>
-          <span className='material-icons text-red-600 text-base'>delete</span>
+          <span className='material-icons text-base'>delete</span>
           <span>Borrar</span>
         </button>
       </div>
