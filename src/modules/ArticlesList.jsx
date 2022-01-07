@@ -6,32 +6,54 @@ export class ArticlesList extends Component {
     const { items, onUpdateArticle, onDeleteArticle, onAddArticle } =
       this.props;
     return (
-      <div className='bg-red-400 w-full h-96 p-6 '>
-        <h2>Lista de Articulos</h2>
-        <button className='border' onClick={onAddArticle}>
-          Agregar Articulo
-        </button>
-        <div className='flex text-sm items-center'>
-          <label className='w-12'>No.</label>
-          <label className='w-1/4'>Descripcion</label>
-          <label className='w-1/12'>Cant.</label>
-          <label className='w-1/12'>Peso</label>
-          <label className='w-1/12'>Precio Unitario</label>
-          <label className='w-1/12'>Arancel</label>
-          <label className='w-1/12'>Margen</label>
-          <label className='w-1/12'>Costo Total</label>
-          <label className='w-1/12'>Ganancia</label>
-          <label className='w-1/12'>PVP Unitario</label>
-          <label className='w-1/12'>Borrar</label>
+      <div className='border rounded-lg w-full p-6 '>
+        <h2 className='text-lg font-bold mb-4'>Lista de Articulos</h2>
+
+        <div className='flex text-sm items-center bg-blue-800 text-center rounded text-white pr-4'>
+          <label className='border-r w-12'>No.</label>
+          <label className='border-r w-1/4'>Descripcion</label>
+          <label className='border-r w-1/12'>Cant.</label>
+          <label className='border-r w-1/12'>
+            Peso <br /> [lb]
+          </label>
+          <label className='border-r w-1/12'>
+            Precio Unitario <br /> [USD]
+          </label>
+          <label className='border-r w-1/12'>
+            Arancel <br /> [%]
+          </label>
+          <label className='border-r w-1/12'>
+            Margen <br /> [%]
+          </label>
+          <label className='border-r w-1/12'>
+            Costo Total <br />
+            [USD]
+          </label>
+          <label className='border-r w-1/12'>
+            Ganancia <br />
+            [USD]
+          </label>
+          <label className='border-r w-1/12'>
+            PVP Unitario <br />
+            [USD]
+          </label>
+          <button
+            className='w-1/12 flex items-center justify-center gap-2 hover:text-green-500'
+            onClick={onAddArticle}>
+            <span className='material-icons text-xl'>library_add</span>
+            <span>Nuevo</span>
+          </button>
         </div>
-        {items.map((item) => (
-          <Article
-            key={item.index}
-            item={item}
-            onDeleteArticle={onDeleteArticle}
-            onUpdateArticle={onUpdateArticle}
-          />
-        ))}
+        <div className='overflow-y-scroll max-h-60 rounded'>
+          {items.map((item) => (
+            <Article
+              key={item.index}
+              item={item}
+              onDeleteArticle={onDeleteArticle}
+              onUpdateArticle={onUpdateArticle}
+            />
+          ))}
+        </div>
       </div>
     );
   }

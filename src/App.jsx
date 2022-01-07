@@ -1,8 +1,8 @@
-import { data } from 'autoprefixer';
 import React, { Component } from 'react';
 import calculate from './logic/calculate';
 import ArticlesList from './modules/ArticlesList';
 import LotCost from './modules/LotCost';
+import logo from './icons/logo.png';
 
 export class App extends Component {
   state = {
@@ -68,6 +68,9 @@ export class App extends Component {
       precioUnitario: 0,
       arancel: 0,
       margen: 0,
+      costoTotalUnitario: 0,
+      gananciaUnitaria: 0,
+      pvpUnitario: 0,
     };
     items.push(item);
     items = this.reIndex(items);
@@ -191,6 +194,7 @@ export class App extends Component {
     const newData = [...localData, newElement];
 
     localStorage.setItem('data', JSON.stringify(newData));
+    this.handleReset();
   };
 
   getLocalStorage = () => {
@@ -207,27 +211,53 @@ export class App extends Component {
 
   render() {
     return (
-      <div className='bg-slate-50 px-[10%] h-screen flex flex-col gap-6'>
-        <h1>Cost calculator</h1>
-        <LotCost lot={this.state.lot} onChangeLot={this.handleChangeLot} />
-        <ArticlesList
-          items={this.state.items}
-          onUpdateArticle={this.handleUpdateArticle}
-          onDeleteArticle={this.handleDeleteArticle}
-          onAddArticle={this.handleAddArticle}
-        />
-        <div>
-          <h2>Controles</h2>
-          <button onClick={this.calculateValues}>Calcular</button>
-          <button onClick={this.handleReset}>Reset</button>
-          <input
-            name='proveedor'
-            type='text'
-            placeholder='Ingrese un proveedor'
-            value={this.state.proveedor}
-            onChange={this.handleChangeProveedor}
+      <div className='bg-slate-50'>
+        <header className='px-[10%] py-4 shadow-md flex justify-between  items-center'>
+          <img className='h-10' src={logo} alt='SCIENTECH-logo' />
+          <div className='flex gap-4'>
+            <input
+              className='px-4 rounded border hover:shadow'
+              name='proveedor'
+              type='text'
+              placeholder='Ingrese un proveedor'
+              value={this.state.proveedor}
+              onChange={this.handleChangeProveedor}
+            />
+            <button
+              className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'
+              onClick={this.handleSave}>
+              Guardar
+            </button>
+            <button className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'>
+              Recuperar
+            </button>
+          </div>
+        </header>
+        <div className='px-[10%]  flex flex-col gap-6 mt-6 '>
+          <div className='border rounded-lg p-6 flex justify-between items-center'>
+            <h1 className='text-3xl font-semibold font-serif'>
+              Calculadora de Importaciones
+            </h1>
+            <div className='flex gap-6'>
+              <button
+                className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'
+                onClick={this.handleReset}>
+                Nuevo
+              </button>
+              <button
+                className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'
+                onClick={this.calculateValues}>
+                Calcular
+              </button>
+            </div>
+          </div>
+          <LotCost lot={this.state.lot} onChangeLot={this.handleChangeLot} />
+          <ArticlesList
+            items={this.state.items}
+            onUpdateArticle={this.handleUpdateArticle}
+            onDeleteArticle={this.handleDeleteArticle}
+            onAddArticle={this.handleAddArticle}
           />
-          <button onClick={this.handleSave}>Guardar</button>
         </div>
       </div>
     );

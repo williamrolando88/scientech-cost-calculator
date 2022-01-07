@@ -116,7 +116,6 @@ const calculate = (stateObj) => {
   pesoTotal = rounded(pesoTotal);
   totalFOBItems = rounded(totalFOBItems);
 
-  console.log(items);
   return {
     items,
     lot: {
