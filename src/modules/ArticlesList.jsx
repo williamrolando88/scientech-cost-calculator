@@ -44,7 +44,7 @@ export class ArticlesList extends Component {
             <span>Nuevo</span>
           </button>
         </div>
-        <div className='overflow-y-scroll h-72 rounded'>
+        <div className='overflow-y-scroll max-h-60 rounded'>
           {items.map((item) => (
             <Article
               key={item.index}
