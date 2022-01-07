@@ -216,7 +216,7 @@ export class App extends Component {
           <img className='h-10' src={logo} alt='SCIENTECH-logo' />
           <div className='flex gap-4'>
             <input
-              className='px-4 rounded border'
+              className='px-4 rounded border hover:shadow'
               name='proveedor'
               type='text'
               placeholder='Ingrese un proveedor'

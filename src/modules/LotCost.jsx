@@ -85,8 +85,10 @@ export class LotCost extends Component {
                 <label className='w-20 border pl-2'>{ivaCourier}</label>
               </div>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56'>Total Pago Courier:</p>
-                <label className='w-20 border pl-2'>{totalLogisticaInt}</label>
+                <p className='w-56 font-semibold'>Total Pago Courier:</p>
+                <label className='w-20 border font-semibold pl-2'>
+                  {totalLogisticaInt}
+                </label>
               </div>
             </div>
           </div>
@@ -109,12 +111,14 @@ export class LotCost extends Component {
                 <label className='w-20 border pl-2'>{ivaAduana}</label>
               </div>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56'>Total Pago Aduana:</p>
-                <label className='w-20 border pl-2'>{totalAduana}</label>
+                <p className='w-56 font-semibold'>Total Pago Aduana:</p>
+                <label className='w-20 font-semibold border pl-2'>
+                  {totalAduana}
+                </label>
               </div>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56'>ISD:</p>
-                <label className='w-20 border pl-2'>{isd}</label>
+                <p className='w-56 font-semibold'>ISD:</p>
+                <label className='w-20 font-semibold border pl-2'>{isd}</label>
               </div>
             </div>
           </div>
