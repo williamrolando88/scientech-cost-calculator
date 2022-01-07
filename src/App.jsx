@@ -194,6 +194,7 @@ export class App extends Component {
     const newData = [...localData, newElement];
 
     localStorage.setItem('data', JSON.stringify(newData));
+    this.handleReset();
   };
 
   getLocalStorage = () => {
