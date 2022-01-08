@@ -221,14 +221,14 @@ export class App extends Component {
             </h1>
             <div className='flex gap-6'>
               <button
-                className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'
-                onClick={this.handleReset}>
-                Nuevo
-              </button>
-              <button
-                className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'
+                className='bg-sky-500 px-4 py-2 rounded text-white border  hover:bg-green-600 hover:text-white'
                 onClick={this.calculateValues}>
                 Calcular
+              </button>
+              <button
+                className='bg-sky-500 px-4 py-2 rounded text-white border  hover:bg-red-600 hover:text-white'
+                onClick={this.handleReset}>
+                Borrar Formulario
               </button>
             </div>
           </div>
