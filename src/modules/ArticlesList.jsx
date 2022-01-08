@@ -14,7 +14,7 @@ export class ArticlesList extends Component {
           <label className='border-r w-1/4'>Descripcion</label>
           <label className='border-r w-1/12'>Cant.</label>
           <label className='border-r w-1/12'>
-            Peso <br /> [lb]
+            Peso Unitario <br /> [lb]
           </label>
           <label className='border-r w-1/12'>
             Precio Unitario <br /> [USD]
