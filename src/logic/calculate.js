@@ -95,7 +95,7 @@ const calculate = (stateObj) => {
 
     // Asign values to item variables
     item.costoTotalUnitario = rounded(costoTotalUnitario);
-    item.gananciaUnitaria = rounded(gananciaUnitaria);
+    item.gananciaUnitaria = rounded(gananciaUnitaria / item.cantidad);
     item.pvpUnitario = rounded(pvpUnitario);
   });
 
