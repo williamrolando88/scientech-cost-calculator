@@ -91,11 +91,11 @@ const calculate = (stateObj) => {
       (baseCourier + logisticaInterna) * weigthFraction +
       comisionBancaria * fobValueFraction;
     const gananciaUnitaria = (item.margen * costoTotalUnitario) / 100;
-    const pvpUnitario = gananciaUnitaria + costoTotalUnitario;
+    const pvpUnitario = (gananciaUnitaria + costoTotalUnitario) / item.cantidad;
 
     // Asign values to item variables
     item.costoTotalUnitario = rounded(costoTotalUnitario);
-    item.gananciaUnitaria = rounded(gananciaUnitaria);
+    item.gananciaUnitaria = rounded(gananciaUnitaria / item.cantidad);
     item.pvpUnitario = rounded(pvpUnitario);
   });
 
