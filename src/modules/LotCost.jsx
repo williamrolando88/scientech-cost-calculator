@@ -5,7 +5,6 @@ export class LotCost extends Component {
     const {
       lot: {
         input: {
-          fleteImpuestos,
           tramiteImportacion,
           fleteReal,
           agenteAduanero,
@@ -15,6 +14,7 @@ export class LotCost extends Component {
           comisionBancaria,
         },
         output: {
+          fleteImpuestos,
           ivaCourier,
           totalLogisticaInt,
           fodinfa,
@@ -22,33 +22,36 @@ export class LotCost extends Component {
           ivaAduana,
           totalAduana,
           isd,
-          pesoTotal,
         },
       },
+      pesoTotal,
       onChangeLot,
     } = this.props;
     return (
       <div className='border rounded-lg w-full p-6'>
-        <h2 className='text-lg font-bold mb-4'>Costos por lote</h2>
-        <div className='flex justify-around'>
+        <h2 className='text-lg font-bold mb-4'>Costos por Lote</h2>
+        <div className='flex justify-around flex-wrap gap-6'>
           <div className='border rounded'>
             <h3 className='text-xl text-center font-semibold'>
               Logistica Internacional
             </h3>
             <div className='flex flex-col px-4 py-2'>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56'>Valor de flete para impuestos:</p>
-                <input
+                <p className='w-56'>Flete para impuestos [USD]:</p>
+                <label className='bg-slate-300 w-20 border font-semibold pl-2'>
+                  {fleteImpuestos}
+                </label>
+                {/* <input
                   className='w-20 border pl-2'
                   onChange={onChangeLot}
                   name='fleteImpuestos'
                   value={fleteImpuestos}
                   type='number'
                   min='0'
-                />
+                /> */}
               </div>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56'>Tramite de importacion:</p>
+                <p className='w-56'>Tramite de importacion [USD]:</p>
                 <input
                   className='w-20 border pl-2'
                   onChange={onChangeLot}

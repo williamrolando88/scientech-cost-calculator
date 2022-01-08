@@ -9,10 +9,10 @@ import logo from './icons/logo.png';
 export class App extends Component {
   state = {
     proveedor: '',
+    pesoTotal: 0,
     items: [],
     lot: {
       input: {
-        fleteImpuestos: 0,
         tramiteImportacion: 0,
         fleteReal: 0,
         agenteAduanero: 0,
@@ -22,6 +22,7 @@ export class App extends Component {
         comisionBancaria: 0,
       },
       output: {
+        fleteImpuestos: 0,
         ivaCourier: 0,
         totalLogisticaInt: 0,
         fodinfa: 0,
@@ -29,7 +30,6 @@ export class App extends Component {
         ivaAduana: 0,
         totalAduana: 0,
         isd: 0,
-        pesoTotal: 0,
       },
     },
   };
@@ -105,7 +105,6 @@ export class App extends Component {
       items: [],
       lot: {
         input: {
-          fleteImpuestos: 0,
           tramiteImportacion: 0,
           fleteReal: 0,
           agenteAduanero: 0,
@@ -115,6 +114,7 @@ export class App extends Component {
           comisionBancaria: 0,
         },
         output: {
+          fleteImpuestos: 0,
           ivaCourier: 0,
           totalLogisticaInt: 0,
           fodinfa: 0,
@@ -122,10 +122,20 @@ export class App extends Component {
           ivaAduana: 0,
           totalAduana: 0,
           isd: 0,
-          pesoTotal: 0,
         },
       },
+      pesoTotal: 0,
     });
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.items !== this.state.items) {
+      this.setState({
+        pesoTotal: this.state.items
+          .map((item) => item.peso)
+          .reduce((a, b) => a + b, 0),
+      });
+    }
   };
 
   handleSave = () => {
@@ -216,7 +226,11 @@ export class App extends Component {
             onDeleteArticle={this.handleDeleteArticle}
             onAddArticle={this.handleAddArticle}
           />
-          <LotCost lot={this.state.lot} onChangeLot={this.handleChangeLot} />
+          <LotCost
+            lot={this.state.lot}
+            pesoTotal={this.state.pesoTotal}
+            onChangeLot={this.handleChangeLot}
+          />
         </div>
       </div>
     );

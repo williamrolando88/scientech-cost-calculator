@@ -7,7 +7,6 @@ const calculate = (stateObj) => {
     items,
     lot: {
       input: {
-        fleteImpuestos,
         tramiteImportacion,
         fleteReal,
         agenteAduanero,
@@ -17,6 +16,7 @@ const calculate = (stateObj) => {
         comisionBancaria,
       },
       output: {
+        fleteImpuestos,
         ivaCourier,
         totalLogisticaInt,
         fodinfa,
@@ -24,9 +24,9 @@ const calculate = (stateObj) => {
         ivaAduana,
         totalAduana,
         isd,
-        pesoTotal,
       },
     },
+    pesoTotal,
   } = stateObj;
 
   // Clear lot output
@@ -37,7 +37,7 @@ const calculate = (stateObj) => {
   ivaAduana = 0;
   totalAduana = 0;
   isd = 0;
-  pesoTotal = 0;
+  fleteImpuestos = 0;
 
   // Declare aux lot variables
   let totalFOBItems = 0;
@@ -51,7 +51,6 @@ const calculate = (stateObj) => {
       (item.cantidad * item.precioUnitario * (100 + ivaOrigen)) / 100;
 
     // Asign values to lot variables
-    pesoTotal += item.pesoItem;
   });
 
   // Calculate FOB and CIF values
@@ -104,6 +103,7 @@ const calculate = (stateObj) => {
   totalAduana = ivaAduana + fodinfa + arancel;
   ivaCourier = baseCourier * 0.12;
   totalLogisticaInt = baseCourier + ivaCourier;
+  fleteImpuestos = pesoTotal * 1.5;
 
   // Format lot output variables
   ivaCourier = rounded(ivaCourier);
@@ -115,12 +115,12 @@ const calculate = (stateObj) => {
   isd = rounded(isd);
   pesoTotal = rounded(pesoTotal);
   totalFOBItems = rounded(totalFOBItems);
+  fleteImpuestos = rounded(fleteImpuestos);
 
   return {
     items,
     lot: {
       input: {
-        fleteImpuestos,
         tramiteImportacion,
         fleteReal,
         agenteAduanero,
@@ -130,6 +130,7 @@ const calculate = (stateObj) => {
         comisionBancaria,
       },
       output: {
+        fleteImpuestos,
         ivaCourier,
         totalLogisticaInt,
         fodinfa,
