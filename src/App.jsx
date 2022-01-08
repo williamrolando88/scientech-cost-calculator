@@ -7,35 +7,16 @@ import logo from './icons/logo.png';
 export class App extends Component {
   state = {
     proveedor: '',
-    items: [
-      {
-        index: 0,
-        descripcion: 'Test item 1',
-        cantidad: 2,
-        peso: 0.5,
-        precioUnitario: 20,
-        arancel: 5,
-        margen: 20,
-      },
-      {
-        index: 1,
-        descripcion: 'Test item 2',
-        cantidad: 5,
-        peso: 1.5,
-        precioUnitario: 15.99,
-        arancel: 15,
-        margen: 15,
-      },
-    ],
+    items: [],
     lot: {
       input: {
-        fleteImpuestos: 12,
-        tramiteImportacion: 40,
-        fleteReal: 10,
-        agenteAduanero: 40,
-        logisticaInterna: 20,
-        ivaOrigen: 7,
-        fleteOrigen: 45,
+        fleteImpuestos: 0,
+        tramiteImportacion: 0,
+        fleteReal: 0,
+        agenteAduanero: 0,
+        logisticaInterna: 0,
+        ivaOrigen: 0,
+        fleteOrigen: 0,
         comisionBancaria: 0,
       },
       output: {
