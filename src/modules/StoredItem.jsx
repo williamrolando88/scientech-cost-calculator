@@ -7,7 +7,7 @@ const StoredItem = (props) => {
   } = props;
 
   var dateOptions = {
-    weekday: 'long',
+    weekday: 'short',
     year: 'numeric',
     month: 'short',
     day: 'numeric',
@@ -27,12 +27,17 @@ const StoredItem = (props) => {
 
   return (
     <div className='flex'>
-      <div className='border py-1 px-2'>{index + 1}</div>
-      <div className='border py-1 px-2'>{printDate}</div>
-      <div className='border py-1 px-2'>{printTime}</div>
-      <div className='border py-1 px-2'>{proveedor}</div>
-      <div className='border py-1 px-2'>{descripcion}</div>
-      <button onClick={() => onSelectItem(index)}>Select</button>
+      <label className='border py-1 px-2 w-12 text-center'>{index + 1}</label>
+      <label className='border py-1 px-2 w-36'>{printDate}</label>
+      <label className='border py-1 px-2 w-20'>{printTime}</label>
+      <label className='border py-1 px-2 w-60'>{proveedor}</label>
+      <label className='border py-1 px-2 w-80'>{descripcion}</label>
+      <button
+        className='w-24 border flex items-center justify-center gap-1 hover:bg-sky-500 hover:text-white'
+        onClick={() => onSelectItem(index)}>
+        <span>Mostrar</span>
+        <span className='material-icons text-base'>file_download</span>
+      </button>
     </div>
   );
 };
