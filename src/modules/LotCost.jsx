@@ -22,6 +22,8 @@ export class LotCost extends Component {
           ivaAduana,
           totalAduana,
           isd,
+          totalFOBItems,
+          totalCIFItems,
         },
       },
       pesoTotal,
@@ -37,8 +39,14 @@ export class LotCost extends Component {
             </h3>
             <div className='flex flex-col px-4 py-2'>
               <div className='flex items-center justify-between gap-4'>
+                <p className='w-56'>Peso total [lb]:</p>
+                <label className='bg-slate-300 w-20 border pl-2'>
+                  {pesoTotal}
+                </label>
+              </div>
+              <div className='flex items-center justify-between gap-4'>
                 <p className='w-56'>Flete para impuestos [USD]:</p>
-                <label className='bg-slate-300 w-20 border font-semibold pl-2'>
+                <label className='bg-slate-300 w-20 border pl-2'>
                   {fleteImpuestos}
                 </label>
                 {/* <input
@@ -49,6 +57,17 @@ export class LotCost extends Component {
                   type='number'
                   min='0'
                 /> */}
+              </div>
+              <div className='flex items-center justify-between gap-4'>
+                <p className='w-56'>Valor de flete real [USD]:</p>
+                <input
+                  className='w-20 border pl-2'
+                  onChange={onChangeLot}
+                  name='fleteReal'
+                  value={fleteReal}
+                  type='number'
+                  min='0'
+                />
               </div>
               <div className='flex items-center justify-between gap-4'>
                 <p className='w-56'>Tramite de importacion [USD]:</p>
@@ -62,18 +81,7 @@ export class LotCost extends Component {
                 />
               </div>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56'>Valor de flete real:</p>
-                <input
-                  className='w-20 border pl-2'
-                  onChange={onChangeLot}
-                  name='fleteReal'
-                  value={fleteReal}
-                  type='number'
-                  min='0'
-                />
-              </div>
-              <div className='flex items-center justify-between gap-4'>
-                <p className='w-56'>Agente aduanero:</p>
+                <p className='w-56'>Agente aduanero [USD]:</p>
                 <input
                   className='w-20 border pl-2'
                   onChange={onChangeLot}
@@ -84,13 +92,13 @@ export class LotCost extends Component {
                 />
               </div>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56'>IVA Courier:</p>
+                <p className='w-56'>IVA Courier [USD]:</p>
                 <label className='bg-slate-300 w-20 border pl-2'>
                   {ivaCourier}
                 </label>
               </div>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56 font-semibold'>Total Pago Courier:</p>
+                <p className='w-56 font-semibold'>Total Pago Courier [USD]:</p>
                 <label className='bg-slate-300 w-20 border font-semibold pl-2'>
                   {totalLogisticaInt}
                 </label>
@@ -104,31 +112,37 @@ export class LotCost extends Component {
             </h3>
             <div className='flex flex-col px-4 py-2'>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56'>FODINFA:</p>
+                <p className='w-56 font-semibold'>Total CIF [USD]:</p>
+                <label className='bg-slate-300 w-20 font-semibold border pl-2'>
+                  {totalCIFItems}
+                </label>
+              </div>
+              <div className='flex items-center justify-between gap-4'>
+                <p className='w-56'>FODINFA [USD]:</p>
                 <label className='bg-slate-300 w-20 border pl-2'>
                   {fodinfa}
                 </label>
               </div>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56'>Aranceles:</p>
+                <p className='w-56'>Aranceles [USD]:</p>
                 <label className='bg-slate-300 w-20 border pl-2'>
                   {arancel}
                 </label>
               </div>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56'>IVA:</p>
+                <p className='w-56'>IVA [USD]:</p>
                 <label className='bg-slate-300 w-20 border pl-2'>
                   {ivaAduana}
                 </label>
               </div>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56 font-semibold'>Total Pago Aduana:</p>
+                <p className='w-56 font-semibold'>Total Pago Aduana [USD]:</p>
                 <label className='bg-slate-300 w-20 font-semibold border pl-2'>
                   {totalAduana}
                 </label>
               </div>
               <div className='flex items-center justify-between gap-4'>
-                <p className='w-56 font-semibold'>ISD:</p>
+                <p className='w-56 font-semibold'>ISD [USD]:</p>
                 <label className='bg-slate-300 w-20 font-semibold border pl-2'>
                   {isd}
                 </label>
@@ -143,7 +157,7 @@ export class LotCost extends Component {
               </h3>
               <div className='flex flex-col px-4 py-2'>
                 <div className='flex items-center justify-between gap-4'>
-                  <p className='w-56'>IVA origen:</p>
+                  <p className='w-56'>IVA origen [%]:</p>
                   <input
                     className='w-20 border pl-2'
                     onChange={onChangeLot}
@@ -154,7 +168,7 @@ export class LotCost extends Component {
                   />
                 </div>
                 <div className='flex items-center justify-between gap-4'>
-                  <p className='w-56'>Flete en origen:</p>
+                  <p className='w-56'>Flete en origen [USD]:</p>
                   <input
                     className='w-20 border pl-2'
                     onChange={onChangeLot}
@@ -165,37 +179,37 @@ export class LotCost extends Component {
                   />
                 </div>
                 <div className='flex items-center justify-between gap-4'>
-                  <p className='w-56'>Tarifas bancarias:</p>
-                  <input
-                    className='w-20 border pl-2'
-                    onChange={onChangeLot}
-                    name='comisionBancaria'
-                    value={comisionBancaria}
-                    type='number'
-                    min='0'
-                  />
+                  <p className='w-56 font-semibold'>Total FOB [USD]:</p>
+                  <label className='bg-slate-300 w-20 font-semibold border pl-2'>
+                    {totalFOBItems}
+                  </label>
                 </div>
               </div>
             </div>
 
             <div className='border rounded'>
               <h3 className='text-xl text-center font-semibold'>
-                Logistica Domestica
+                Otros Valores Nacionales
               </h3>
               <div className='flex flex-col px-4 py-2'>
                 <div className='flex items-center justify-between gap-4'>
-                  <p className='w-56'>Peso total [lb]:</p>
-                  <label className='bg-slate-300 w-20 border pl-2'>
-                    {pesoTotal}
-                  </label>
-                </div>
-                <div className='flex items-center justify-between gap-4'>
-                  <p className='w-56'>Costo de envio:</p>
+                  <p className='w-56'>Valor flete nacional [USD]:</p>
                   <input
                     className='w-20 border pl-2'
                     onChange={onChangeLot}
                     name='logisticaInterna'
                     value={logisticaInterna}
+                    type='number'
+                    min='0'
+                  />
+                </div>
+                <div className='flex items-center justify-between gap-4'>
+                  <p className='w-56'>Tarifas bancarias [USD]:</p>
+                  <input
+                    className='w-20 border pl-2'
+                    onChange={onChangeLot}
+                    name='comisionBancaria'
+                    value={comisionBancaria}
                     type='number'
                     min='0'
                   />

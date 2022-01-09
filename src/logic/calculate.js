@@ -24,6 +24,8 @@ const calculate = (stateObj) => {
         ivaAduana,
         totalAduana,
         isd,
+        totalFOBItems,
+        totalCIFItems,
       },
     },
     pesoTotal,
@@ -37,11 +39,11 @@ const calculate = (stateObj) => {
   ivaAduana = 0;
   totalAduana = 0;
   isd = 0;
-  fleteImpuestos = 0;
+  fleteImpuestos = pesoTotal * 1.5;
+  totalFOBItems = 0;
+  totalCIFItems = 0;
 
   // Declare aux lot variables
-  let totalFOBItems = 0;
-  let totalCIFItems = 0;
 
   // Extract articles input values and calculate EXW values
   items.forEach((item) => {
@@ -66,6 +68,8 @@ const calculate = (stateObj) => {
       (item.itemFOBValue + fleteImpuestos * weigthFraction) * 1.01;
     item.itemFODINFA = item.itemCIFValue * 0.005;
     item.itemArancel = (item.itemCIFValue * item.arancel) / 100;
+
+    console.log(item.itemCIFValue);
 
     // Asign values to lot variables
     isd += item.itemISD;
@@ -103,7 +107,6 @@ const calculate = (stateObj) => {
   totalAduana = ivaAduana + fodinfa + arancel;
   ivaCourier = baseCourier * 0.12;
   totalLogisticaInt = baseCourier + ivaCourier;
-  fleteImpuestos = pesoTotal * 1.5;
 
   // Format lot output variables
   ivaCourier = rounded(ivaCourier);
@@ -115,6 +118,7 @@ const calculate = (stateObj) => {
   isd = rounded(isd);
   pesoTotal = rounded(pesoTotal);
   totalFOBItems = rounded(totalFOBItems);
+  totalCIFItems = rounded(totalCIFItems);
   fleteImpuestos = rounded(fleteImpuestos);
 
   return {
@@ -139,9 +143,10 @@ const calculate = (stateObj) => {
         totalAduana,
         isd,
         pesoTotal,
+        totalCIFItems,
+        totalFOBItems,
       },
     },
-    totalFOBItems,
   };
 };
 

@@ -5,9 +5,11 @@ import Header from './modules/Header';
 import LotCost from './modules/LotCost';
 
 import logo from './icons/logo.png';
+import SavePopUp from './modules/SavePopUp';
 
 export class App extends Component {
   state = {
+    saving: false,
     proveedor: '',
     pesoTotal: 0,
     items: [],
@@ -30,6 +32,8 @@ export class App extends Component {
         ivaAduana: 0,
         totalAduana: 0,
         isd: 0,
+        totalFOBItems: 0,
+        totalCIFItems: 0,
       },
     },
   };
@@ -122,6 +126,8 @@ export class App extends Component {
           ivaAduana: 0,
           totalAduana: 0,
           isd: 0,
+          totalFOBItems: 0,
+          totalCIFItems: 0,
         },
       },
       pesoTotal: 0,
@@ -139,11 +145,11 @@ export class App extends Component {
   };
 
   handleSave = () => {
+    this.setState({ saving: true });
     const {
       proveedor,
       items,
       lot: { input },
-      totalFOBItems,
     } = this.state;
 
     if (!proveedor) {
@@ -156,10 +162,6 @@ export class App extends Component {
       return;
     }
 
-    if (!totalFOBItems) {
-      alert('No se puede guardar sin calcular');
-      return;
-    }
     const localData = this.getLocalStorage();
 
     let itemsInput = [];
@@ -207,19 +209,15 @@ export class App extends Component {
       <div className='bg-slate-50'>
         <Header
           onProveedorChange={this.handleChangeProveedor}
-          onSave={this.handleSave}
+          onOpenSaving={() => {
+            this.setState({ saving: true });
+          }}
           proveedor={this.state.proveedor}
           logo={logo}
           onReset={this.handleReset}
           onCalculate={this.calculateValues}
         />
-        <div className='px-[10%]  flex flex-col gap-6 mt-6 '>
-          {/* <div className='border rounded-lg p-6 flex justify-between items-center'>
-            <h1 className='text-3xl font-semibold font-serif'>
-              Calculadora de Importaciones
-            </h1>
-            <div className='flex gap-6'></div>
-          </div> */}
+        <main className='px-[10%]  flex flex-col gap-6 mt-6 '>
           <ArticlesList
             items={this.state.items}
             onUpdateArticle={this.handleUpdateArticle}
@@ -231,7 +229,13 @@ export class App extends Component {
             pesoTotal={this.state.pesoTotal}
             onChangeLot={this.handleChangeLot}
           />
-        </div>
+        </main>
+        <SavePopUp
+          onCloseSaving={() => {
+            this.setState({ saving: false });
+          }}
+          saving={this.state.saving}
+        />
       </div>
     );
   }

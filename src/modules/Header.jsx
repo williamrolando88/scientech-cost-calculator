@@ -1,20 +1,19 @@
 import React from 'react';
 
 const Header = (props) => {
-  const { proveedor, onProveedorChange, onSave, logo, onReset, onCalculate } =
-    props;
+  const { onOpenSaving, logo, onReset, onCalculate } = props;
   return (
     <header className='px-[10%] py-4 shadow-md flex justify-between  items-center'>
       <img className='h-10' src={logo} alt='SCIENTECH-logo' />
       <div className='flex gap-4'>
-        <input
+        {/* <input
           className='px-4 rounded border hover:shadow'
           name='proveedor'
           type='text'
           placeholder='Ingrese un proveedor'
           value={proveedor}
           onChange={onProveedorChange}
-        />
+        /> */}
         <button
           className='bg-sky-500 px-4 py-2 rounded text-white border  hover:bg-green-600 hover:text-white'
           onClick={onCalculate}>
@@ -22,7 +21,7 @@ const Header = (props) => {
         </button>
         <button
           className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'
-          onClick={onSave}>
+          onClick={onOpenSaving}>
           Guardar
         </button>
         <button className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'>
