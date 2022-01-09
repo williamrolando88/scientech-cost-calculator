@@ -197,7 +197,21 @@ export class App extends Component {
     const retrievedData = this.getLocalStorage()[index];
     this.setState({
       items: retrievedData.items,
-      lot: { ...this.state.lot, input: retrievedData.lotInput },
+      lot: {
+        input: retrievedData.lotInput,
+        output: {
+          fleteImpuestos: 0,
+          ivaCourier: 0,
+          totalLogisticaInt: 0,
+          fodinfa: 0,
+          arancel: 0,
+          ivaAduana: 0,
+          totalAduana: 0,
+          isd: 0,
+          totalFOBItems: 0,
+          totalCIFItems: 0,
+        },
+      },
     });
   };
 
