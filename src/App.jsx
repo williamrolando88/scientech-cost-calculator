@@ -10,7 +10,6 @@ import SavePopUp from './modules/SavePopUp';
 export class App extends Component {
   state = {
     saving: false,
-    proveedor: '',
     pesoTotal: 0,
     items: [],
     lot: {
@@ -36,6 +35,36 @@ export class App extends Component {
         totalCIFItems: 0,
       },
     },
+  };
+
+  handleReset = () => {
+    this.setState({
+      items: [],
+      lot: {
+        input: {
+          tramiteImportacion: 0,
+          fleteReal: 0,
+          agenteAduanero: 0,
+          logisticaInterna: 0,
+          ivaOrigen: 0,
+          fleteOrigen: 0,
+          comisionBancaria: 0,
+        },
+        output: {
+          fleteImpuestos: 0,
+          ivaCourier: 0,
+          totalLogisticaInt: 0,
+          fodinfa: 0,
+          arancel: 0,
+          ivaAduana: 0,
+          totalAduana: 0,
+          isd: 0,
+          totalFOBItems: 0,
+          totalCIFItems: 0,
+        },
+      },
+      pesoTotal: 0,
+    });
   };
 
   reIndex = (prevArr) => {
@@ -103,37 +132,6 @@ export class App extends Component {
     this.setState({ ...newState });
   };
 
-  handleReset = () => {
-    this.setState({
-      proveedor: '',
-      items: [],
-      lot: {
-        input: {
-          tramiteImportacion: 0,
-          fleteReal: 0,
-          agenteAduanero: 0,
-          logisticaInterna: 0,
-          ivaOrigen: 0,
-          fleteOrigen: 0,
-          comisionBancaria: 0,
-        },
-        output: {
-          fleteImpuestos: 0,
-          ivaCourier: 0,
-          totalLogisticaInt: 0,
-          fodinfa: 0,
-          arancel: 0,
-          ivaAduana: 0,
-          totalAduana: 0,
-          isd: 0,
-          totalFOBItems: 0,
-          totalCIFItems: 0,
-        },
-      },
-      pesoTotal: 0,
-    });
-  };
-
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.items !== this.state.items) {
       this.setState({
@@ -144,18 +142,13 @@ export class App extends Component {
     }
   };
 
-  handleSave = () => {
-    this.setState({ saving: true });
+  handleSave = (proveedor, descripcion) => {
+    this.setState({ saving: false });
+
     const {
-      proveedor,
       items,
       lot: { input },
     } = this.state;
-
-    if (!proveedor) {
-      alert('Ingrese un proveedor');
-      return;
-    }
 
     if (items.length === 0) {
       alert('Ingrese articulos');
@@ -178,15 +171,16 @@ export class App extends Component {
     });
 
     const newElement = {
-      index: 0,
+      index: localData.length,
       date: new Date(),
-      proveedor: proveedor,
+      proveedor,
+      descripcion,
       items: itemsInput,
       lotInput: input,
-      FOBValue: totalFOBItems,
     };
 
     const newData = [...localData, newElement];
+    // console.log(newData);
 
     localStorage.setItem('data', JSON.stringify(newData));
     this.handleReset();
@@ -197,22 +191,13 @@ export class App extends Component {
     return localData ? localData : [];
   };
 
-  handleChangeProveedor = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-    console.log(this.state);
-  };
-
   render() {
     return (
       <div className='bg-slate-50'>
         <Header
-          onProveedorChange={this.handleChangeProveedor}
           onOpenSaving={() => {
             this.setState({ saving: true });
           }}
-          proveedor={this.state.proveedor}
           logo={logo}
           onReset={this.handleReset}
           onCalculate={this.calculateValues}
@@ -231,6 +216,7 @@ export class App extends Component {
           />
         </main>
         <SavePopUp
+          onSave={this.handleSave}
           onCloseSaving={() => {
             this.setState({ saving: false });
           }}

@@ -6,14 +6,6 @@ const Header = (props) => {
     <header className='px-[10%] py-4 shadow-md flex justify-between  items-center'>
       <img className='h-10' src={logo} alt='SCIENTECH-logo' />
       <div className='flex gap-4'>
-        {/* <input
-          className='px-4 rounded border hover:shadow'
-          name='proveedor'
-          type='text'
-          placeholder='Ingrese un proveedor'
-          value={proveedor}
-          onChange={onProveedorChange}
-        /> */}
         <button
           className='bg-sky-500 px-4 py-2 rounded text-white border  hover:bg-green-600 hover:text-white'
           onClick={onCalculate}>
