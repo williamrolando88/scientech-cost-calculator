@@ -30,7 +30,7 @@ export class ArticlesList extends Component {
             [USD]
           </label>
           <label className='border-r w-1/12'>
-            Ganancia <br />
+            Ganancia Unitaria <br />
             [USD]
           </label>
           <label className='border-r w-1/12'>
