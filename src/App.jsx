@@ -6,10 +6,12 @@ import LotCost from './modules/LotCost';
 
 import logo from './icons/logo.png';
 import SavePopUp from './modules/SavePopUp';
+import RetrievePopUp from './modules/RetrievePopUp';
 
 export class App extends Component {
   state = {
     saving: false,
+    retrieving: false,
     pesoTotal: 0,
     items: [],
     lot: {
@@ -180,7 +182,6 @@ export class App extends Component {
     };
 
     const newData = [...localData, newElement];
-    // console.log(newData);
 
     localStorage.setItem('data', JSON.stringify(newData));
     this.handleReset();
@@ -191,6 +192,29 @@ export class App extends Component {
     return localData ? localData : [];
   };
 
+  handleSelectItem = (index) => {
+    this.setState({ retrieving: false });
+    const retrievedData = this.getLocalStorage()[index];
+    this.setState({
+      items: retrievedData.items,
+      lot: {
+        input: retrievedData.lotInput,
+        output: {
+          fleteImpuestos: 0,
+          ivaCourier: 0,
+          totalLogisticaInt: 0,
+          fodinfa: 0,
+          arancel: 0,
+          ivaAduana: 0,
+          totalAduana: 0,
+          isd: 0,
+          totalFOBItems: 0,
+          totalCIFItems: 0,
+        },
+      },
+    });
+  };
+
   render() {
     return (
       <div className='bg-slate-50'>
@@ -198,11 +222,14 @@ export class App extends Component {
           onOpenSaving={() => {
             this.setState({ saving: true });
           }}
+          onOpenRetrieving={() => {
+            this.setState({ retrieving: true });
+          }}
           logo={logo}
           onReset={this.handleReset}
           onCalculate={this.calculateValues}
         />
-        <main className='px-[10%]  flex flex-col gap-6 mt-6 '>
+        <main className='px-[10%] flex flex-col gap-6 pt-24 h-screen'>
           <ArticlesList
             items={this.state.items}
             onUpdateArticle={this.handleUpdateArticle}
@@ -221,6 +248,14 @@ export class App extends Component {
             this.setState({ saving: false });
           }}
           saving={this.state.saving}
+        />
+        <RetrievePopUp
+          onCloseRetrieving={() => {
+            this.setState({ retrieving: false });
+          }}
+          retrieving={this.state.retrieving}
+          onFetchData={this.getLocalStorage}
+          onSelectItem={this.handleSelectItem}
         />
       </div>
     );

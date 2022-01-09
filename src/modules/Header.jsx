@@ -1,9 +1,9 @@
 import React from 'react';
 
 const Header = (props) => {
-  const { onOpenSaving, logo, onReset, onCalculate } = props;
+  const { onOpenSaving, logo, onReset, onCalculate, onOpenRetrieving } = props;
   return (
-    <header className='px-[10%] py-4 shadow-md flex justify-between  items-center'>
+    <header className='fixed top-0 left-0 bg-slate-50 w-screen px-[10%] py-4 shadow-md flex justify-between  items-center'>
       <img className='h-10' src={logo} alt='SCIENTECH-logo' />
       <div className='flex gap-4'>
         <button
@@ -16,7 +16,9 @@ const Header = (props) => {
           onClick={onOpenSaving}>
           Guardar
         </button>
-        <button className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'>
+        <button
+          className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'
+          onClick={onOpenRetrieving}>
           Recuperar
         </button>
         <button
