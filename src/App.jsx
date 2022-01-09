@@ -182,7 +182,6 @@ export class App extends Component {
     };
 
     const newData = [...localData, newElement];
-    // console.log(newData);
 
     localStorage.setItem('data', JSON.stringify(newData));
     this.handleReset();
@@ -193,19 +192,25 @@ export class App extends Component {
     return localData ? localData : [];
   };
 
+  sendData = () => {
+    return 'Here is the data';
+  };
+
   render() {
     return (
       <div className='bg-slate-50'>
         <Header
           onOpenSaving={() => {
-            console.log('click');
             this.setState({ saving: true });
+          }}
+          onOpenRetrieving={() => {
+            this.setState({ retrieving: true });
           }}
           logo={logo}
           onReset={this.handleReset}
           onCalculate={this.calculateValues}
         />
-        <main className='px-[10%]  flex flex-col gap-6 mt-6 '>
+        <main className='px-[10%] flex flex-col gap-6 pt-24 h-screen'>
           <ArticlesList
             items={this.state.items}
             onUpdateArticle={this.handleUpdateArticle}
@@ -230,6 +235,7 @@ export class App extends Component {
             this.setState({ retrieving: false });
           }}
           retrieving={this.state.retrieving}
+          onFetchData={this.getLocalStorage}
         />
       </div>
     );
