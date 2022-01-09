@@ -6,10 +6,12 @@ import LotCost from './modules/LotCost';
 
 import logo from './icons/logo.png';
 import SavePopUp from './modules/SavePopUp';
+import RetrievePopUp from './modules/RetrievePopUp';
 
 export class App extends Component {
   state = {
     saving: false,
+    retrieving: false,
     pesoTotal: 0,
     items: [],
     lot: {
@@ -196,6 +198,7 @@ export class App extends Component {
       <div className='bg-slate-50'>
         <Header
           onOpenSaving={() => {
+            console.log('click');
             this.setState({ saving: true });
           }}
           logo={logo}
@@ -221,6 +224,12 @@ export class App extends Component {
             this.setState({ saving: false });
           }}
           saving={this.state.saving}
+        />
+        <RetrievePopUp
+          onCloseRetrieving={() => {
+            this.setState({ retrieving: false });
+          }}
+          retrieving={this.state.retrieving}
         />
       </div>
     );

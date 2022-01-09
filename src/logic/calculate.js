@@ -69,8 +69,6 @@ const calculate = (stateObj) => {
     item.itemFODINFA = item.itemCIFValue * 0.005;
     item.itemArancel = (item.itemCIFValue * item.arancel) / 100;
 
-    console.log(item.itemCIFValue);
-
     // Asign values to lot variables
     isd += item.itemISD;
     fodinfa += item.itemFODINFA;
