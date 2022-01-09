@@ -2,10 +2,8 @@ import React, { useEffect } from 'react';
 import StoredItem from './StoredItem';
 
 const RetrievePopUp = (props) => {
-  const { retrieving, onCloseRetrieving, onFetchData } = props;
-
+  const { retrieving, onCloseRetrieving, onFetchData, onSelectItem } = props;
   const storedItems = retrieving && onFetchData();
-
   return (
     retrieving && (
       <div className='fixed top-0 left-0 h-screen w-full bg-black/40 flex justify-center items-center'>
@@ -13,7 +11,11 @@ const RetrievePopUp = (props) => {
           <h3 className='text-lg'>Recuperar Informacion</h3>
           <div>
             {storedItems.map((item) => (
-              <StoredItem key={item.index} item={item} />
+              <StoredItem
+                key={item.index}
+                item={item}
+                onSelectItem={onSelectItem}
+              />
             ))}
           </div>
           <div className='mt-6 flex justify-end items-center gap-6'>

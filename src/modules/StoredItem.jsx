@@ -3,6 +3,7 @@ import React from 'react';
 const StoredItem = (props) => {
   const {
     item: { index, date, proveedor, descripcion },
+    onSelectItem,
   } = props;
 
   var dateOptions = {
@@ -31,6 +32,7 @@ const StoredItem = (props) => {
       <div className='border py-1 px-2'>{printTime}</div>
       <div className='border py-1 px-2'>{proveedor}</div>
       <div className='border py-1 px-2'>{descripcion}</div>
+      <button onClick={() => onSelectItem(index)}>Select</button>
     </div>
   );
 };

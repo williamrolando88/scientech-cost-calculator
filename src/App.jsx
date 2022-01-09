@@ -192,8 +192,13 @@ export class App extends Component {
     return localData ? localData : [];
   };
 
-  sendData = () => {
-    return 'Here is the data';
+  handleSelectItem = (index) => {
+    this.setState({ retrieving: false });
+    const retrievedData = this.getLocalStorage()[index];
+    this.setState({
+      items: retrievedData.items,
+      lot: { ...this.state.lot, input: retrievedData.lotInput },
+    });
   };
 
   render() {
@@ -236,6 +241,7 @@ export class App extends Component {
           }}
           retrieving={this.state.retrieving}
           onFetchData={this.getLocalStorage}
+          onSelectItem={this.handleSelectItem}
         />
       </div>
     );
