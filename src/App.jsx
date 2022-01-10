@@ -230,16 +230,16 @@ export class App extends Component {
           onCalculate={this.calculateValues}
         />
         <main className='px-[10%] flex flex-col gap-6 pt-24 h-screen'>
+          <LotCost
+            lot={this.state.lot}
+            pesoTotal={this.state.pesoTotal}
+            onChangeLot={this.handleChangeLot}
+          />
           <ArticlesList
             items={this.state.items}
             onUpdateArticle={this.handleUpdateArticle}
             onDeleteArticle={this.handleDeleteArticle}
             onAddArticle={this.handleAddArticle}
-          />
-          <LotCost
-            lot={this.state.lot}
-            pesoTotal={this.state.pesoTotal}
-            onChangeLot={this.handleChangeLot}
           />
         </main>
         <SavePopUp
