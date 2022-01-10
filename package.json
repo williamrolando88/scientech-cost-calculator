@@ -1,9 +1,10 @@
 {
   "name": "scientech-cost-calculator",
-  "version": "0.0.0",
+  "version": "0.2.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build --base=/scientech-cost-calculator/",
+    "build1": "vite build",
     "preview": "vite preview --port 5500",
     "publish": "gh-pages -d dist"
   },

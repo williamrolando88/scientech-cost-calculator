@@ -89,15 +89,23 @@ const calculate = (stateObj) => {
       item.itemFODINFA +
       item.itemArancel +
       item.itemISD +
-      (baseCourier + logisticaInterna) * weigthFraction +
+      baseCourier * weigthFraction +
       comisionBancaria * fobValueFraction;
-    const gananciaUnitaria = (item.margen * costoTotalUnitario) / 100;
-    const pvpUnitario = (gananciaUnitaria + costoTotalUnitario) / item.cantidad;
+    const gananciaUnitaria =
+      costoTotalUnitario / ((100 - item.margen) / 100) - costoTotalUnitario;
+    const pvpUnitario =
+      gananciaUnitaria +
+      costoTotalUnitario +
+      (logisticaInterna / 1.12) * weigthFraction;
+
+    console.log(costoTotalUnitario);
+    console.log(gananciaUnitaria);
+    console.log(pvpUnitario);
 
     // Asign values to item variables
     item.costoTotalUnitario = rounded(costoTotalUnitario);
     item.gananciaUnitaria = rounded(gananciaUnitaria / item.cantidad);
-    item.pvpUnitario = rounded(pvpUnitario);
+    item.pvpUnitario = rounded(pvpUnitario / item.cantidad);
   });
 
   // Set lot output variables
