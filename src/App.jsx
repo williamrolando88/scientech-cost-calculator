@@ -138,7 +138,7 @@ export class App extends Component {
     if (prevState.items !== this.state.items) {
       this.setState({
         pesoTotal: this.state.items
-          .map((item) => item.peso)
+          .map((item) => item.peso * item.cantidad)
           .reduce((a, b) => a + b, 0),
       });
     }
