@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import calculate from './logic/calculate';
 import ArticlesList from './modules/ArticlesList';
+import Header from './modules/Header';
 import LotCost from './modules/LotCost';
+
 import logo from './icons/logo.png';
+import SavePopUp from './modules/SavePopUp';
+import RetrievePopUp from './modules/RetrievePopUp';
 
 export class App extends Component {
   state = {
-    proveedor: '',
+    saving: false,
+    retrieving: false,
+    pesoTotal: 0,
     items: [],
     lot: {
       input: {
-        fleteImpuestos: 0,
         tramiteImportacion: 0,
         fleteReal: 0,
         agenteAduanero: 0,
@@ -20,6 +25,7 @@ export class App extends Component {
         comisionBancaria: 0,
       },
       output: {
+        fleteImpuestos: 0,
         ivaCourier: 0,
         totalLogisticaInt: 0,
         fodinfa: 0,
@@ -27,9 +33,40 @@ export class App extends Component {
         ivaAduana: 0,
         totalAduana: 0,
         isd: 0,
-        pesoTotal: 0,
+        totalFOBItems: 0,
+        totalCIFItems: 0,
       },
     },
+  };
+
+  handleReset = () => {
+    this.setState({
+      items: [],
+      lot: {
+        input: {
+          tramiteImportacion: 0,
+          fleteReal: 0,
+          agenteAduanero: 0,
+          logisticaInterna: 0,
+          ivaOrigen: 0,
+          fleteOrigen: 0,
+          comisionBancaria: 0,
+        },
+        output: {
+          fleteImpuestos: 0,
+          ivaCourier: 0,
+          totalLogisticaInt: 0,
+          fodinfa: 0,
+          arancel: 0,
+          ivaAduana: 0,
+          totalAduana: 0,
+          isd: 0,
+          totalFOBItems: 0,
+          totalCIFItems: 0,
+        },
+      },
+      pesoTotal: 0,
+    });
   };
 
   reIndex = (prevArr) => {
@@ -97,57 +134,29 @@ export class App extends Component {
     this.setState({ ...newState });
   };
 
-  handleReset = () => {
-    this.setState({
-      proveedor: '',
-      items: [],
-      lot: {
-        input: {
-          fleteImpuestos: 0,
-          tramiteImportacion: 0,
-          fleteReal: 0,
-          agenteAduanero: 0,
-          logisticaInterna: 0,
-          ivaOrigen: 0,
-          fleteOrigen: 0,
-          comisionBancaria: 0,
-        },
-        output: {
-          ivaCourier: 0,
-          totalLogisticaInt: 0,
-          fodinfa: 0,
-          arancel: 0,
-          ivaAduana: 0,
-          totalAduana: 0,
-          isd: 0,
-          pesoTotal: 0,
-        },
-      },
-    });
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.items !== this.state.items) {
+      this.setState({
+        pesoTotal: this.state.items
+          .map((item) => item.peso * item.cantidad)
+          .reduce((a, b) => a + b, 0),
+      });
+    }
   };
 
-  handleSave = () => {
+  handleSave = (proveedor, descripcion) => {
+    this.setState({ saving: false });
+
     const {
-      proveedor,
       items,
       lot: { input },
-      totalFOBItems,
     } = this.state;
-
-    if (!proveedor) {
-      alert('Ingrese un proveedor');
-      return;
-    }
 
     if (items.length === 0) {
       alert('Ingrese articulos');
       return;
     }
 
-    if (!totalFOBItems) {
-      alert('No se puede guardar sin calcular');
-      return;
-    }
     const localData = this.getLocalStorage();
 
     let itemsInput = [];
@@ -164,12 +173,12 @@ export class App extends Component {
     });
 
     const newElement = {
-      index: 0,
+      index: localData.length,
       date: new Date(),
-      proveedor: proveedor,
+      proveedor,
+      descripcion,
       items: itemsInput,
       lotInput: input,
-      FOBValue: totalFOBItems,
     };
 
     const newData = [...localData, newElement];
@@ -183,63 +192,71 @@ export class App extends Component {
     return localData ? localData : [];
   };
 
-  handleChangeProveedor = (e) => {
+  handleSelectItem = (index) => {
+    this.setState({ retrieving: false });
+    const retrievedData = this.getLocalStorage()[index];
     this.setState({
-      [e.target.name]: e.target.value,
+      items: retrievedData.items,
+      lot: {
+        input: retrievedData.lotInput,
+        output: {
+          fleteImpuestos: 0,
+          ivaCourier: 0,
+          totalLogisticaInt: 0,
+          fodinfa: 0,
+          arancel: 0,
+          ivaAduana: 0,
+          totalAduana: 0,
+          isd: 0,
+          totalFOBItems: 0,
+          totalCIFItems: 0,
+        },
+      },
     });
-    console.log(this.state);
   };
 
   render() {
     return (
       <div className='bg-slate-50'>
-        <header className='px-[10%] py-4 shadow-md flex justify-between  items-center'>
-          <img className='h-10' src={logo} alt='SCIENTECH-logo' />
-          <div className='flex gap-4'>
-            <input
-              className='px-4 rounded border hover:shadow'
-              name='proveedor'
-              type='text'
-              placeholder='Ingrese un proveedor'
-              value={this.state.proveedor}
-              onChange={this.handleChangeProveedor}
-            />
-            <button
-              className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'
-              onClick={this.handleSave}>
-              Guardar
-            </button>
-            <button className='bg-sky-500 px-4 py-2 rounded text-white border border-sky-500 hover:bg-slate-50 hover:text-black'>
-              Recuperar
-            </button>
-          </div>
-        </header>
-        <div className='px-[10%]  flex flex-col gap-6 mt-6 '>
-          <div className='border rounded-lg p-6 flex justify-between items-center'>
-            <h1 className='text-3xl font-semibold font-serif'>
-              Calculadora de Importaciones
-            </h1>
-            <div className='flex gap-6'>
-              <button
-                className='bg-sky-500 px-4 py-2 rounded text-white border  hover:bg-green-600 hover:text-white'
-                onClick={this.calculateValues}>
-                Calcular
-              </button>
-              <button
-                className='bg-sky-500 px-4 py-2 rounded text-white border  hover:bg-red-600 hover:text-white'
-                onClick={this.handleReset}>
-                Borrar Formulario
-              </button>
-            </div>
-          </div>
-          <LotCost lot={this.state.lot} onChangeLot={this.handleChangeLot} />
+        <Header
+          onOpenSaving={() => {
+            this.setState({ saving: true });
+          }}
+          onOpenRetrieving={() => {
+            this.setState({ retrieving: true });
+          }}
+          logo={logo}
+          onReset={this.handleReset}
+          onCalculate={this.calculateValues}
+        />
+        <main className='px-[10%] flex flex-col gap-6 pt-24 h-screen'>
           <ArticlesList
             items={this.state.items}
             onUpdateArticle={this.handleUpdateArticle}
             onDeleteArticle={this.handleDeleteArticle}
             onAddArticle={this.handleAddArticle}
           />
-        </div>
+          <LotCost
+            lot={this.state.lot}
+            pesoTotal={this.state.pesoTotal}
+            onChangeLot={this.handleChangeLot}
+          />
+        </main>
+        <SavePopUp
+          onSave={this.handleSave}
+          onCloseSaving={() => {
+            this.setState({ saving: false });
+          }}
+          saving={this.state.saving}
+        />
+        <RetrievePopUp
+          onCloseRetrieving={() => {
+            this.setState({ retrieving: false });
+          }}
+          retrieving={this.state.retrieving}
+          onFetchData={this.getLocalStorage}
+          onSelectItem={this.handleSelectItem}
+        />
       </div>
     );
   }

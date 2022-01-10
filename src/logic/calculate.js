@@ -7,7 +7,6 @@ const calculate = (stateObj) => {
     items,
     lot: {
       input: {
-        fleteImpuestos,
         tramiteImportacion,
         fleteReal,
         agenteAduanero,
@@ -17,6 +16,7 @@ const calculate = (stateObj) => {
         comisionBancaria,
       },
       output: {
+        fleteImpuestos,
         ivaCourier,
         totalLogisticaInt,
         fodinfa,
@@ -24,9 +24,11 @@ const calculate = (stateObj) => {
         ivaAduana,
         totalAduana,
         isd,
-        pesoTotal,
+        totalFOBItems,
+        totalCIFItems,
       },
     },
+    pesoTotal,
   } = stateObj;
 
   // Clear lot output
@@ -37,11 +39,11 @@ const calculate = (stateObj) => {
   ivaAduana = 0;
   totalAduana = 0;
   isd = 0;
-  pesoTotal = 0;
+  fleteImpuestos = pesoTotal * 1.5;
+  totalFOBItems = 0;
+  totalCIFItems = 0;
 
   // Declare aux lot variables
-  let totalFOBItems = 0;
-  let totalCIFItems = 0;
 
   // Extract articles input values and calculate EXW values
   items.forEach((item) => {
@@ -51,7 +53,6 @@ const calculate = (stateObj) => {
       (item.cantidad * item.precioUnitario * (100 + ivaOrigen)) / 100;
 
     // Asign values to lot variables
-    pesoTotal += item.pesoItem;
   });
 
   // Calculate FOB and CIF values
@@ -115,12 +116,13 @@ const calculate = (stateObj) => {
   isd = rounded(isd);
   pesoTotal = rounded(pesoTotal);
   totalFOBItems = rounded(totalFOBItems);
+  totalCIFItems = rounded(totalCIFItems);
+  fleteImpuestos = rounded(fleteImpuestos);
 
   return {
     items,
     lot: {
       input: {
-        fleteImpuestos,
         tramiteImportacion,
         fleteReal,
         agenteAduanero,
@@ -130,6 +132,7 @@ const calculate = (stateObj) => {
         comisionBancaria,
       },
       output: {
+        fleteImpuestos,
         ivaCourier,
         totalLogisticaInt,
         fodinfa,
@@ -138,9 +141,10 @@ const calculate = (stateObj) => {
         totalAduana,
         isd,
         pesoTotal,
+        totalCIFItems,
+        totalFOBItems,
       },
     },
-    totalFOBItems,
   };
 };
 

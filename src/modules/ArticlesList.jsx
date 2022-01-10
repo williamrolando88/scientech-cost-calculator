@@ -30,7 +30,7 @@ export class ArticlesList extends Component {
             [USD]
           </label>
           <label className='border-r w-1/12'>
-            Ganancia <br />
+            Ganancia Unitaria <br />
             [USD]
           </label>
           <label className='border-r w-1/12'>
@@ -44,7 +44,7 @@ export class ArticlesList extends Component {
             <span className='material-icons text-lg'>add_circle</span>
           </button>
         </div>
-        <div className='overflow-y-scroll max-h-60 rounded'>
+        <div className='overflow-y-scroll h-40 rounded'>
           {items.map((item) => (
             <Article
               key={item.index}
