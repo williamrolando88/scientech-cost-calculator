@@ -26,7 +26,7 @@ export class Article extends Component {
           value={descripcion}
           onChange={(e) => onUpdateArticle(e, index)}
           name='descripcion'
-          placeholder='descripcion'
+          placeholder='Ingrese descripcion'
           type='text'
         />
         <input
