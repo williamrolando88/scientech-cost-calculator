@@ -9,7 +9,7 @@ export class ArticlesList extends Component {
       <div className='border rounded-lg w-full p-6 '>
         <h2 className='text-lg font-bold mb-4'>Lista de Articulos</h2>
 
-        <div className='flex text-sm items-center bg-blue-800 text-center rounded text-white mr-4'>
+        <div className='flex text-sm items-center bg-blue-800 text-center rounded text-white'>
           <label className='border-r w-12'>No.</label>
           <label className='border-r w-1/4'>Descripcion</label>
           <label className='border-r w-1/12'>Cant.</label>
@@ -44,7 +44,7 @@ export class ArticlesList extends Component {
             <span className='material-icons text-lg'>add_circle</span>
           </button>
         </div>
-        <div className='overflow-y-scroll h-40 rounded'>
+        <div className='rounded'>
           {items.map((item) => (
             <Article
               key={item.index}
