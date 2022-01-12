@@ -23,9 +23,9 @@ export class App extends Component {
         ivaOrigen: 0,
         fleteOrigen: 0,
         comisionBancaria: 0,
+        fleteImpuestos: 0,
       },
       output: {
-        fleteImpuestos: 0,
         ivaCourier: 0,
         totalLogisticaInt: 0,
         fodinfa: 0,
@@ -51,9 +51,9 @@ export class App extends Component {
           ivaOrigen: 0,
           fleteOrigen: 0,
           comisionBancaria: 0,
+          fleteImpuestos: 0,
         },
         output: {
-          fleteImpuestos: 0,
           ivaCourier: 0,
           totalLogisticaInt: 0,
           fodinfa: 0,
@@ -82,8 +82,8 @@ export class App extends Component {
       index: items.length,
       descripcion: '',
       cantidad: 1,
-      peso: 0,
-      precioUnitario: 0,
+      peso: 1,
+      precioUnitario: 1,
       arancel: 0,
       margen: 0,
       costoTotalUnitario: 0,
@@ -200,7 +200,6 @@ export class App extends Component {
       lot: {
         input: retrievedData.lotInput,
         output: {
-          fleteImpuestos: 0,
           ivaCourier: 0,
           totalLogisticaInt: 0,
           fodinfa: 0,
@@ -217,7 +216,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div className='bg-slate-50'>
+      <div className="bg-slate-50">
         <Header
           onOpenSaving={() => {
             this.setState({ saving: true });
@@ -229,7 +228,7 @@ export class App extends Component {
           onReset={this.handleReset}
           onCalculate={this.calculateValues}
         />
-        <main className='px-[10%] flex flex-col gap-6 pt-24 h-screen'>
+        <main className="px-[10%] flex flex-col gap-6 pt-24 h-screen">
           <LotCost
             lot={this.state.lot}
             pesoTotal={this.state.pesoTotal}
