@@ -14,9 +14,9 @@ const calculate = (stateObj) => {
         ivaOrigen,
         fleteOrigen,
         comisionBancaria,
+        fleteImpuestos,
       },
       output: {
-        fleteImpuestos,
         ivaCourier,
         totalLogisticaInt,
         fodinfa,
@@ -39,7 +39,6 @@ const calculate = (stateObj) => {
   ivaAduana = 0;
   totalAduana = 0;
   isd = 0;
-  fleteImpuestos = pesoTotal * 1.5;
   totalFOBItems = 0;
   totalCIFItems = 0;
 
@@ -125,7 +124,6 @@ const calculate = (stateObj) => {
   pesoTotal = rounded(pesoTotal);
   totalFOBItems = rounded(totalFOBItems);
   totalCIFItems = rounded(totalCIFItems);
-  fleteImpuestos = rounded(fleteImpuestos);
 
   return {
     items,
@@ -138,9 +136,9 @@ const calculate = (stateObj) => {
         ivaOrigen,
         fleteOrigen,
         comisionBancaria,
+        fleteImpuestos,
       },
       output: {
-        fleteImpuestos,
         ivaCourier,
         totalLogisticaInt,
         fodinfa,

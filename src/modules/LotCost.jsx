@@ -12,9 +12,9 @@ export class LotCost extends Component {
           ivaOrigen,
           fleteOrigen,
           comisionBancaria,
+          fleteImpuestos,
         },
         output: {
-          fleteImpuestos,
           ivaCourier,
           totalLogisticaInt,
           fodinfa,
@@ -46,9 +46,18 @@ export class LotCost extends Component {
               </div>
               <div className="flex items-center justify-between gap-4">
                 <p className="w-56">Flete para impuestos [USD]:</p>
-                <label className="bg-slate-300 w-20 border pl-2">
+                {/* <label className="bg-slate-300 w-20 border pl-2">
                   {fleteImpuestos}
-                </label>
+                </label> */}
+                <input
+                  className="w-20 border pl-2"
+                  onChange={onChangeLot}
+                  onWheel={(e) => e.target.blur()}
+                  name="fleteImpuestos"
+                  value={fleteImpuestos}
+                  type="number"
+                  min="0"
+                />
               </div>
               <div className="flex items-center justify-between gap-4">
                 <p className="w-56">Valor de flete real [USD]:</p>

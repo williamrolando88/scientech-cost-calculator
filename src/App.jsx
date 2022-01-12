@@ -23,9 +23,9 @@ export class App extends Component {
         ivaOrigen: 0,
         fleteOrigen: 0,
         comisionBancaria: 0,
+        fleteImpuestos: 0,
       },
       output: {
-        fleteImpuestos: 0,
         ivaCourier: 0,
         totalLogisticaInt: 0,
         fodinfa: 0,
@@ -51,9 +51,9 @@ export class App extends Component {
           ivaOrigen: 0,
           fleteOrigen: 0,
           comisionBancaria: 0,
+          fleteImpuestos: 0,
         },
         output: {
-          fleteImpuestos: 0,
           ivaCourier: 0,
           totalLogisticaInt: 0,
           fodinfa: 0,
@@ -200,7 +200,6 @@ export class App extends Component {
       lot: {
         input: retrievedData.lotInput,
         output: {
-          fleteImpuestos: 0,
           ivaCourier: 0,
           totalLogisticaInt: 0,
           fodinfa: 0,
