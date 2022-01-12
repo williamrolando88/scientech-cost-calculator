@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
 const Article = (props) => {
@@ -18,10 +17,6 @@ const Article = (props) => {
     onUpdateArticle,
     onDeleteArticle,
   } = props;
-
-  // Article.propTypes = {
-  //   cantidad: PropTypes.number,
-  // };
 
   return (
     <div className="bg-slate-300 flex items-center text-center">
