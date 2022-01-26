@@ -97,10 +97,6 @@ const calculate = (stateObj) => {
       costoTotalUnitario +
       (logisticaInterna / 1.12) * weigthFraction;
 
-    console.log(costoTotalUnitario);
-    console.log(gananciaUnitaria);
-    console.log(pvpUnitario);
-
     // Asign values to item variables
     item.costoTotalUnitario = rounded(costoTotalUnitario);
     item.gananciaUnitaria = rounded(gananciaUnitaria / item.cantidad);
