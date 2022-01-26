@@ -12,6 +12,7 @@ const LotCost = (props) => {
         fleteOrigen,
         comisionBancaria,
         fleteImpuestos,
+        fleteImportacion,
       },
       output: {
         ivaCourier,
@@ -28,6 +29,7 @@ const LotCost = (props) => {
     pesoTotal,
     onChangeLot,
   } = props;
+
   return (
     <div className="border rounded-lg w-full p-6">
       <h2 className="text-lg font-bold mb-4">Costos por Lote</h2>
@@ -43,11 +45,8 @@ const LotCost = (props) => {
                 {pesoTotal}
               </label>
             </div>
-            <div className="flex items-center justify-between gap-4">
+            {/* <div className="flex items-center justify-between gap-4">
               <p className="w-56">Flete para impuestos [USD]:</p>
-              {/* <label className="bg-slate-300 w-20 border pl-2">
-                  {fleteImpuestos}
-                </label> */}
               <input
                 className="w-20 border pl-2"
                 onChange={onChangeLot}
@@ -66,6 +65,18 @@ const LotCost = (props) => {
                 onWheel={(e) => e.target.blur()}
                 name="fleteReal"
                 value={fleteReal}
+                type="number"
+                min="0"
+              />
+            </div> */}
+            <div className="flex items-center justify-between gap-4">
+              <p className="w-56">Costo flete importacion [USD/lb]:</p>
+              <input
+                className="w-20 border pl-2"
+                onChange={onChangeLot}
+                onWheel={(e) => e.target.blur()}
+                name="fleteImportacion"
+                value={fleteImportacion}
                 type="number"
                 min="0"
               />
