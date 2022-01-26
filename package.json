@@ -1,6 +1,6 @@
 {
   "name": "scientech-cost-calculator",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
