@@ -8,13 +8,12 @@ const calculate = (stateObj) => {
     lot: {
       input: {
         tramiteImportacion,
-        fleteReal,
         agenteAduanero,
         logisticaInterna,
         ivaOrigen,
         fleteOrigen,
         comisionBancaria,
-        fleteImpuestos,
+        fleteImportacion,
       },
       output: {
         ivaCourier,
@@ -43,6 +42,7 @@ const calculate = (stateObj) => {
   totalCIFItems = 0;
 
   // Declare aux lot variables
+  const fleteInternacional = pesoTotal * fleteImportacion;
 
   // Extract articles input values and calculate EXW values
   items.forEach((item) => {
@@ -64,7 +64,7 @@ const calculate = (stateObj) => {
 
     // Calculate aux CIF item values
     item.itemCIFValue =
-      (item.itemFOBValue + fleteImpuestos * weigthFraction) * 1.01;
+      (item.itemFOBValue + fleteInternacional * weigthFraction) * 1.01;
     item.itemFODINFA = item.itemCIFValue * 0.005;
     item.itemArancel = (item.itemCIFValue * item.arancel) / 100;
 
@@ -76,7 +76,7 @@ const calculate = (stateObj) => {
     totalCIFItems += item.itemCIFValue;
   });
 
-  let baseCourier = tramiteImportacion + fleteReal + agenteAduanero;
+  let baseCourier = tramiteImportacion + fleteInternacional + agenteAduanero;
 
   // Set articles output values
   items.forEach((item) => {
@@ -130,13 +130,12 @@ const calculate = (stateObj) => {
     lot: {
       input: {
         tramiteImportacion,
-        fleteReal,
         agenteAduanero,
         logisticaInterna,
         ivaOrigen,
         fleteOrigen,
         comisionBancaria,
-        fleteImpuestos,
+        fleteImportacion,
       },
       output: {
         ivaCourier,
