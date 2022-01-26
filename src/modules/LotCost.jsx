@@ -5,13 +5,11 @@ const LotCost = (props) => {
     lot: {
       input: {
         tramiteImportacion,
-        fleteReal,
         agenteAduanero,
         logisticaInterna,
         ivaOrigen,
         fleteOrigen,
         comisionBancaria,
-        fleteImpuestos,
         fleteImportacion,
       },
       output: {
