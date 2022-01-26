@@ -3,7 +3,8 @@
   "version": "0.3.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=/scientech-cost-calculator/",
+    "build-net": "vite build",
     "preview": "vite preview --port 5500",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
