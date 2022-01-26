@@ -17,13 +17,12 @@ export class App extends Component {
     lot: {
       input: {
         tramiteImportacion: 0,
-        fleteReal: 0,
         agenteAduanero: 0,
         logisticaInterna: 0,
         ivaOrigen: 0,
         fleteOrigen: 0,
         comisionBancaria: 0,
-        fleteImpuestos: 0,
+        fleteImportacion: 0,
       },
       output: {
         ivaCourier: 0,
@@ -45,13 +44,12 @@ export class App extends Component {
       lot: {
         input: {
           tramiteImportacion: 0,
-          fleteReal: 0,
           agenteAduanero: 0,
           logisticaInterna: 0,
           ivaOrigen: 0,
           fleteOrigen: 0,
           comisionBancaria: 0,
-          fleteImpuestos: 0,
+          fleteImportacion: 0,
         },
         output: {
           ivaCourier: 0,
